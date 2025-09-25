@@ -1,10 +1,22 @@
 ---
-title: "foxkloske.github.io"
+title: "Fox Kloske"
+image: img_1236.jpg
+
+about:
+  template: jolla
+  image-shape: round
+  image-width: 17em
+
+  links:
+    - text: LinkedIn
+      href: https://www.linkedin.com/in/foxkloske/
+    - text: GitHub
+      href: https://github.com/foxkloske/foxkloske.github.io
+    - text: TFRRS
+      href: https://www.tfrrs.org/athletes/8722625/Pomona_Pitzer/Fox_Kloske.html
 ---
 
-This is a Quarto website.
-
-To learn more about Quarto websites visit <https://quarto.org/docs/websites>.
+Hi! Welcome to Fox's first website, thanks for stopping by. I go to Pomona College, love Spikeball, the Brooklyn Nets, and oil painting. Say hello if you see me around!
 
 ```{r}
 1 + 1
