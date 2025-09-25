@@ -4,11 +4,14 @@ description: Census survey data of spending on children from 1997 through 2016.
 author: Fox Kloske
 date: September 24, 2025
 format: html
+
+#Remove messages/warnings
 code-fold: true
 execute: 
   warning: false
   message: false
-  
+
+#Citation & format 
 about:
   template: jolla
   links:
@@ -19,18 +22,15 @@ about:
 ---
 
 ```{r}
-#| echo: false
-
 library(tidyverse)
 
-# Get the Data
+#Borrowed from TidyTuesday instructions
 kids <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2020/2020-09-15/kids.csv')
 
-```
-
-```{r}
 national_average <- kids |>
   group_by(year, variable) |>
+  
+  #Isolate four categories of interest
   filter(variable == "lib" |
          variable == "PK12ed" |
          variable == "Medicaid_CHIP" |
@@ -41,12 +41,13 @@ ggplot(national_average, aes(x = year, y = inf_adj_perchild)) +
   geom_line(aes(color = variable)) +
   facet_wrap(~ variable) +
   labs(
-    title = "National Inflation Adjusted Spending on Children by Year",
+    title = "National Spending on Children by Year (Inflation Adjusted)",
     x = "Year",
-    y = "Inflation Adjusted Spending Per Child ($)"
+    y = "Spending Per Child (Inflation Adjusted $)"
   ) +
+  
+  #Centered format
   theme(legend.position = "none")
 ```
-
 
 Data is courtesy of the TidyTuesday via the Urban Institute:

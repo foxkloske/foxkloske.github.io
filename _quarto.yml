@@ -12,14 +12,14 @@ website:
         menu:
           - text: "United States Spending on Children"
             href: tidy1.qmd
-          - text: "Tidy 2"
+          - text: "Transit-Infrastructure Costs"
             href: tidy2.qmd
 
 format:
   html:
     theme:
       - cosmo
-      - brand
+     # - brand
     css: styles.css
     toc: true
     page-layout: full

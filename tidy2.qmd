@@ -1,6 +1,51 @@
 ---
-title: "Tidy 2"
+title: "Transit Infrastructure Costs"
+description: Comparison of countries and their transit-intfrastructure costs
+author: Fox Kloske
+date: September 24, 2025
 format: html
+
+#Remove messages/warnings
+code-fold: true
+execute: 
+  warning: false
+  message: false
+
+#Citation & format 
+about:
+  template: jolla
+  links:
+    - text: TidyTuesday
+      href: https://github.com/rfordatascience/tidytuesday/blob/main/data/2021/2021-01-05/readme.md
+    - text: Transit Costs Project
+      href: https://transitcosts.com/
 ---
 
-This is where Tidy 2 will go!
+```{r}
+library(tidyverse)
+
+#Borrowed from TidyTuesday instructions
+transit_cost <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2021/2021-01-05/transit_cost.csv')
+
+country_total <- transit_cost |>
+  group_by(country) |>
+  filter(country == "US" |
+         country == "CN" |
+         country == "BR" |
+         country == "FR" |
+         country == "AE") |>
+  summarize(cost_km_millions = mean(cost_km_millions))
+
+ggplot(country_total, aes(x = country, y = cost_km_millions, fill = country)) +
+  geom_col() +
+    labs(
+    title = "Transit Infrastructure Project Costs by Country",
+    x = "Country Code",
+    y = "Cost Per KM in Millions of USD"
+  ) +
+  
+  #Centered format
+  theme(legend.position = "none")
+```
+
+Data is courtesy of the TidyTuesday via the Transit Costs Project:

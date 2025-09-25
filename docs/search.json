@@ -2,9 +2,9 @@
   {
     "objectID": "tidy2.html",
     "href": "tidy2.html",
-    "title": "Tidy 2",
+    "title": "Transit Infrastructure Costs",
     "section": "",
-    "text": "This is where Tidy 2 will go!"
+    "text": "Code\nlibrary(tidyverse)\n\n#Borrowed from TidyTuesday instructions\ntransit_cost &lt;- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2021/2021-01-05/transit_cost.csv')\n\ncountry_total &lt;- transit_cost |&gt;\n  group_by(country) |&gt;\n  filter(country == \"US\" |\n         country == \"CN\" |\n         country == \"BR\" |\n         country == \"FR\" |\n         country == \"AE\") |&gt;\n  summarize(cost_km_millions = mean(cost_km_millions))\n\nggplot(country_total, aes(x = country, y = cost_km_millions, fill = country)) +\n  geom_col() +\n    labs(\n    title = \"Transit Infrastructure Project Costs by Country\",\n    x = \"Country Code\",\n    y = \"Cost Per KM in Millions of USD\"\n  ) +\n  \n  #Centered format\n  theme(legend.position = \"none\")\n\n\n\n\n\n\n\n\n\nData is courtesy of the TidyTuesday via the Transit Costs Project:"
   },
   {
     "objectID": "about.html",
@@ -25,6 +25,6 @@
     "href": "tidy1.html",
     "title": "United States Spending on Kids",
     "section": "",
-    "text": "Code\nnational_average &lt;- kids |&gt;\n  group_by(year, variable) |&gt;\n  filter(variable == \"lib\" |\n         variable == \"PK12ed\" |\n         variable == \"Medicaid_CHIP\" |\n         variable == \"parkrec\") |&gt;\n  summarize(inf_adj_perchild = mean(inf_adj_perchild))\n\nggplot(national_average, aes(x = year, y = inf_adj_perchild)) +\n  geom_line(aes(color = variable)) +\n  facet_wrap(~ variable) +\n  labs(\n    title = \"National Inflation Adjusted Spending on Children by Year\",\n    x = \"Year\",\n    y = \"Inflation Adjusted Spending Per Child ($)\"\n  ) +\n  theme(legend.position = \"none\")\n\n\n\n\n\n\n\n\n\nData is courtesy of the TidyTuesday via the Urban Institute:"
+    "text": "Code\nlibrary(tidyverse)\n\n#Borrowed from TidyTuesday instructions\nkids &lt;- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2020/2020-09-15/kids.csv')\n\nnational_average &lt;- kids |&gt;\n  group_by(year, variable) |&gt;\n  \n  #Isolate four categories of interest\n  filter(variable == \"lib\" |\n         variable == \"PK12ed\" |\n         variable == \"Medicaid_CHIP\" |\n         variable == \"parkrec\") |&gt;\n  summarize(inf_adj_perchild = mean(inf_adj_perchild))\n\nggplot(national_average, aes(x = year, y = inf_adj_perchild)) +\n  geom_line(aes(color = variable)) +\n  facet_wrap(~ variable) +\n  labs(\n    title = \"National Spending on Children by Year (Inflation Adjusted)\",\n    x = \"Year\",\n    y = \"Spending Per Child (Inflation Adjusted $)\"\n  ) +\n  \n  #Centered format\n  theme(legend.position = \"none\")\n\n\n\n\n\n\n\n\n\nData is courtesy of the TidyTuesday via the Urban Institute:"
   }
 ]
