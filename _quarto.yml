@@ -10,7 +10,7 @@ website:
         href: index.qmd
       - text: "Data Viz"
         menu:
-          - text: "Tidy 1"
+          - text: "United States Spending on Children"
             href: tidy1.qmd
           - text: "Tidy 2"
             href: tidy2.qmd

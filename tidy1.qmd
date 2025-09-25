@@ -1,9 +1,52 @@
 ---
-title: "Tidy 1"
-description: Tidy 1, coming soon.
+title: "United States Spending on Kids"
+description: Census survey data of spending on children from 1997 through 2016.
 author: Fox Kloske
 date: September 24, 2025
 format: html
+code-fold: true
+execute: 
+  warning: false
+  message: false
+  
+about:
+  template: jolla
+  links:
+    - text: TidyTuesday
+      href: https://github.com/rfordatascience/tidytuesday/blob/main/data/2020/2020-09-15/readme.md
+    - text: The Urban Institute
+      href: https://datacatalog.urban.org/dataset/state-state-spending-kids-dataset
 ---
 
-This is where Tidy 1 will go!
+```{r}
+#| echo: false
+
+library(tidyverse)
+
+# Get the Data
+kids <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2020/2020-09-15/kids.csv')
+
+```
+
+```{r}
+national_average <- kids |>
+  group_by(year, variable) |>
+  filter(variable == "lib" |
+         variable == "PK12ed" |
+         variable == "Medicaid_CHIP" |
+         variable == "parkrec") |>
+  summarize(inf_adj_perchild = mean(inf_adj_perchild))
+
+ggplot(national_average, aes(x = year, y = inf_adj_perchild)) +
+  geom_line(aes(color = variable)) +
+  facet_wrap(~ variable) +
+  labs(
+    title = "National Inflation Adjusted Spending on Children by Year",
+    x = "Year",
+    y = "Inflation Adjusted Spending Per Child ($)"
+  ) +
+  theme(legend.position = "none")
+```
+
+
+Data is courtesy of the TidyTuesday via the Urban Institute:

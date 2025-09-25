@@ -1,6 +1,9 @@
 ---
 title: "Fox Kloske"
 image: media/img_1236.jpg
+format: 
+  html: 
+    theme: superhero
 
 about:
   template: jolla
