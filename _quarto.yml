@@ -3,12 +3,17 @@ project:
   output-dir: docs
 
 website:
-  title: "foxkloske.github.io"
+  title: "Fox Kloske"
   navbar:
     left:
-      - href: index.qmd
-        text: Home
-      - about.qmd
+      - text: "Home"     
+        href: index.qmd
+      - text: "Data Viz"
+        menu:
+          - text: "Tidy 1"
+            href: tidy1.qmd
+          - text: "Tidy 2"
+            href: tidy2.qmd
 
 format:
   html:
@@ -17,6 +22,7 @@ format:
       - brand
     css: styles.css
     toc: true
+    page-layout: full
 
 editor: visual
 

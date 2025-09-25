@@ -1,6 +1,6 @@
 ---
 title: "Fox Kloske"
-image: img_1236.jpg
+image: media/img_1236.jpg
 
 about:
   template: jolla
@@ -16,8 +16,4 @@ about:
       href: https://www.tfrrs.org/athletes/8722625/Pomona_Pitzer/Fox_Kloske.html
 ---
 
-Hi! Welcome to Fox's first website, thanks for stopping by. I go to Pomona College, love Spikeball, the Brooklyn Nets, and oil painting. Say hello if you see me around!
-
-```{r}
-1 + 1
-```
+Hi! Welcome to Fox's first website, thanks for stopping by. I go to Pomona College, use he/him pronouns, and love to play Spikeball, watch the Brooklyn Nets, or paint with oil. Say hello if you see me around!

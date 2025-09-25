@@ -1,0 +1,9 @@
+---
+title: "Tidy 1"
+description: Tidy 1, coming soon.
+author: Fox Kloske
+date: September 24, 2025
+format: html
+---
+
+This is where Tidy 1 will go!

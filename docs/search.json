@@ -1,5 +1,12 @@
 [
   {
+    "objectID": "tidy2.html",
+    "href": "tidy2.html",
+    "title": "Tidy 2",
+    "section": "",
+    "text": "This is where Tidy 2 will go!"
+  },
+  {
     "objectID": "about.html",
     "href": "about.html",
     "title": "About",
@@ -11,6 +18,13 @@
     "href": "index.html",
     "title": "Fox Kloske",
     "section": "",
-    "text": "Hi! Welcome to Fox’s first website, thanks for stopping by. I go to Pomona College, love Spikeball, the Brooklyn Nets, and oil painting. Say hello if you see me around!\n\n1 + 1\n\n[1] 2"
+    "text": "Hi! Welcome to Fox’s first website, thanks for stopping by. I go to Pomona College, use he/him pronouns, and love to play Spikeball, watch the Brooklyn Nets, or paint with oil. Say hello if you see me around!"
+  },
+  {
+    "objectID": "tidy1.html",
+    "href": "tidy1.html",
+    "title": "Tidy 1",
+    "section": "",
+    "text": "This is where Tidy 1 will go!"
   }
 ]
