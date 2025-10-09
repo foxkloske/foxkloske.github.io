@@ -78,7 +78,7 @@ tree_count <- sum(str_count(tolower(SquirrelCensus), "(?<=\\s|^)tree"), na.rm = 
 #Number is writen inline with `r tree_count`
 ```
 
-Much better! The data shows a mix of squirrel-tivities. But most of all, squirrels spend a *tree*-mendous amount of time on and around trees. For this graph, only observations with specific location details are included. However, there are `r tree_count` mentions of tree related shenanagins in the data set! Let's now get to the *nuts* and bolts of who they spend their time with.
+Much better! The data shows a mix of squirrel-tivities. But most of all, squirrels spend a *tree*-mendous amount of time on and around trees. For this graph, only observations with specific location details are included. However, there are `r tree_count` mentions of tree-related shenanagins in the data set! Let's now get to the *nuts* and bolts of who they spend their time with.
 
 ```{r}
 Squirrel3 <- SquirrelCensus |>
