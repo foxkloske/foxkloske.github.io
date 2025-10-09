@@ -1,0 +1,65 @@
+---
+title: "Central Park Squirrel Census"
+description: Using str() functions and regular expressions to find out what Central Park squirrels were doing in 2018.
+author: Fox Kloske
+date: October 8, 2025
+format: html
+
+#Remove messages/warnings
+code-fold: true
+execute: 
+  warning: false
+  message: false
+  
+#format
+about:
+  template: jolla
+---
+
+```{r}
+library(tidyverse)
+
+#fun dataset from NYC OpenData living in my github repository
+SquirrelCensus <- read_csv("https://raw.githubusercontent.com/foxkloske/foxkloske.github.io/main/2018_Central_Park_Squirrel_Census_-_Squirrel_Data.csv")
+
+Squirrel1 <- SquirrelCensus |>
+  group_by(Location) |>
+  #na.rm not recognizing empty values, so instead tested if any characters are in the value
+  filter(str_detect(Location, "."))
+
+ggplot(Squirrel1, aes(x = Location, fill = Location)) +
+  geom_bar(na.rm = TRUE) +
+    labs(
+      title = "Location of Squirrels",
+      x = "Relationship to Ground",
+      y = "Count"
+  )
+
+```
+
+The data set gives some detail about where these acorn-lovers spend their days, but we can do better!
+
+```{r}
+
+Squirrel2 <- SquirrelCensus |>
+  #A differnt str command to get rid of empty values!
+  filter(str_length(`Specific Location`) > 0) |>
+  mutate(tree_status = str_detect(tolower(`Specific Location`),"tree")) |>
+  #Combines the five columns into one (x-axis)
+  pivot_longer(cols = Running:Foraging,
+               names_to = "Activity",
+               values_to = "Status") |>
+  filter(Status == 1)
+
+ggplot(Squirrel2, aes(x = Activity, fill = tree_status)) +
+  geom_bar() +
+  labs(
+    title = "Daily Squirrel-tivities",
+    x = "Activity",
+    y = "Count",
+    fill = "On a tree?"
+  )
+
+```
+
+Much better! Squirrels spend a tree-mendous amount of time on trees :) Only observations with specific location details are included.

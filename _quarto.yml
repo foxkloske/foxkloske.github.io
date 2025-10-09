@@ -14,6 +14,8 @@ website:
             href: tidy1.qmd
           - text: "Transit-Infrastructure Costs"
             href: tidy2.qmd
+      - text: "Text Analysis"
+        href: txtanalysis.qmd
 
 format:
   html:

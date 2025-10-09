@@ -1,6 +1,6 @@
 ---
 title: "Transit Infrastructure Costs"
-description: Comparison of countries and their transit-intfrastructure costs
+description: Comparison of countries and their transit-intfrastructure costs.
 author: Fox Kloske
 date: September 24, 2025
 format: html
