@@ -1,6 +1,6 @@
 ---
 title: "Central Park Squirrel Census"
-description: Using str() functions and regular expressions to find out what Central Park squirrels were doing in 2018.
+description: Using str() functions and regular expressions to discover what Central Park squirrels were doing in Junuary 2018.
 author: Fox Kloske
 date: October 8, 2025
 format: html
@@ -14,6 +14,13 @@ execute:
 #format
 about:
   template: jolla
+  
+#citation
+  links:
+    - text: NYC OpenData
+      href: https://data.cityofnewyork.us/Environment/2018-Central-Park-Squirrel-Census      -Squirrel-Data/vfnx-vebw/about_data
+    - text: The Squirrel Census
+      href: https://www.thesquirrelcensus.com/
 ---
 
 ```{r}
@@ -24,20 +31,23 @@ SquirrelCensus <- read_csv("https://raw.githubusercontent.com/foxkloske/foxklosk
 
 Squirrel1 <- SquirrelCensus |>
   group_by(Location) |>
-  #na.rm not recognizing empty values, so instead tested if any characters are in the value
+  #na.rm not recognizing empty values, so instead tested if any characters are in the value.
   filter(str_detect(Location, "."))
 
 ggplot(Squirrel1, aes(x = Location, fill = Location)) +
   geom_bar(na.rm = TRUE) +
     labs(
-      title = "Location of Squirrels",
+      title = "Where Do Squirrels Spend Their Time?",
       x = "Relationship to Ground",
       y = "Count"
-  )
+  ) +
+  theme_classic() +
 
+#Centered format
+theme(legend.position = "none")
 ```
 
-The data set gives some detail about where these acorn-lovers spend their days, but we can do better!
+Most squirrels are spotted on the ground. The built-in columns gives some detail about where these acorn-lovers spend their days, but we can do better!
 
 ```{r}
 
@@ -54,12 +64,42 @@ Squirrel2 <- SquirrelCensus |>
 ggplot(Squirrel2, aes(x = Activity, fill = tree_status)) +
   geom_bar() +
   labs(
-    title = "Daily Squirrel-tivities",
+    title = "What Are Squirrels Doing All Day?",
     x = "Activity",
     y = "Count",
     fill = "On a tree?"
-  )
+  ) +
+  theme_classic()
 
+#Complicated way to sneak in more str() & regular expressions
+#str_count() returns line by line, sum returns single value
+#The word street also appears in the dataset, but want to exclude from count of tree
+tree_count <- sum(str_count(tolower(SquirrelCensus), "(?<=\\s|^)tree"), na.rm = TRUE)
+#Number is writen inline with `r tree_count`
 ```
 
-Much better! Squirrels spend a tree-mendous amount of time on trees :) Only observations with specific location details are included.
+Much better! The data shows a mix of squirrel-tivities. But most of all, squirrels spend a *tree*-mendous amount of time on and around trees. For this graph, only observations with specific location details are included. However, there are `r tree_count` mentions of tree related shenanagins in the data set! Let's now get to the *nuts* and bolts of who they spend their time with.
+
+```{r}
+Squirrel3 <- SquirrelCensus |>
+  #Sometimes the same dog in mentioned twice in interaction
+  mutate(num_dogs = str_count(tolower(`Other Interactions`), "(?<!dog)dog"),
+         Date = as.character(Date),
+         Day = str_sub(Date, 3, 4)) |>
+  group_by(Day)
+
+ggplot(Squirrel3, aes(x = Day, y = num_dogs)) +
+  geom_col(fill = "springgreen4") +
+  labs(
+    title = "Daily Encounters of Squirrels and Dogs",
+    x = "Date",
+    y = "Count",
+  ) +
+  theme_classic()
+
+chase_count <- sum(str_count(tolower(SquirrelCensus), "nut|acorn"), na.rm = TRUE)
+```
+
+Dogs! These poor squirrels spend their time in Central Park running from dogs! Data is taken over the month of January 2018, but not every day is captured, creating this funky x-axis. And, to make matters worse only observations `r chase_count` mention food!
+
+Thanks for tagging along on this journey to understand the busy social lives of our furry neighbors! To find out more for yourself about these squirrels, visit NYC OpenData or theSquirrelCensus.com
