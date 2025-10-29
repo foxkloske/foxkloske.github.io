@@ -16,6 +16,8 @@ website:
             href: tidy2.qmd
       - text: "Text Analysis"
         href: txtanalysis.qmd
+      - text: "Simulation Study"
+        href: SimulationStudy.qmd
 
 format:
   html:

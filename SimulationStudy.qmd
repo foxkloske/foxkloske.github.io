@@ -1,0 +1,84 @@
+---
+title: "Does Town Size Matter? Undestanding Population and Educational Attainment in the United Kingdom"
+author: Fox Kloske
+date: October 28, 2025
+format: html
+
+#Remove messages/warnings
+code-fold: true
+execute: 
+  warning: false
+  message: false
+---
+
+In 2023, the United Kingdom's Office for National Statistics published an article titled: "Why do children and young people in smaller towns do better academically than those in larger town?". For 2012-2013 cohort, the study found that students in smaller towns had better educational attainment on average than those in medium or large towns and cities. 
+
+The above analysis is observational, so let's test this claim! The ONS has created their own educational score—a summary of standardized test score performance over different points during education—which we will use to represent performance. A score of 0 is the national average: small towns have an average score of 0.4, medium 0.3, and large -0.9. Following the setup of the article, we will compare small towns against other town sizes with permutation testing to evaluate their claim.
+
+```{r}
+english_education <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2024/2024-01-23/english_education.csv')
+```
+
+Let's first visualize the data:
+
+```{r}
+library(tidyverse)
+
+#Dummy Variable
+english_education <- english_education |> 
+  mutate(town_size = if_else(size_flag == "Small Towns", "Small", "Medium, Large, City"))
+
+english_education |>
+  ggplot(aes(x = town_size, y = education_score)) +
+  geom_boxplot() + 
+  labs(
+    title = "Visualizing Distribution of Academic Performance by Town Size ",
+    y = "Education Score",
+    x = ""
+  )
+```
+
+Let's dig in, is this phenomenon by chance? To do so, we define our null hypothesis: 
+
+- H~0~ = Town size has no effect on education score = Education_Score~SmallTown~ = Education_Score~OtherSizes~
+
+- H~A~ = Students in small towns perform differently than larger sizes = Education_Score~SmallTown~ $\neq$ Education_Score~OtherSizes~
+
+First, we calculate the obserted statistic:
+
+```{r}
+#calculating the difference in means
+
+mean_diff <- english_education |>
+  group_by(town_size) |>
+  summarize(mean(education_score))
+```
+
+Now, lets shufftle:
+
+```{r}
+#shuffle data
+perm_data <- function(repititions, dframe){
+  dframe |>
+    select(town_size, education_score) |>
+    mutate(perm_town_size = sample(town_size, replace = FALSE)) |>
+    group_by(perm_town_size) |>
+    summarize(score_mean = mean(education_score)) |>
+    summarize(score_diff = diff(score_mean))
+}
+
+perm_stats <- 
+  map(c(1:100), perm_data, dframe = english_education) |>
+  list_rbind()
+
+perm_stats |> 
+  ggplot(aes(x = score_diff)) +
+  geom_histogram() +
+  geom_vline(aes(xintercept = 0.7408704), color = "red")
+```
+
+
+
+
+
+
