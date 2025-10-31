@@ -1,7 +1,7 @@
 ---
 title: "Does Town Size Matter? Undestanding Population and Educational Attainment in the United Kingdom"
 author: Fox Kloske
-date: October 28, 2025
+date: October 30, 2025
 format: html
 
 #Remove messages/warnings
@@ -9,24 +9,26 @@ code-fold: true
 execute: 
   warning: false
   message: false
+
+  links:
+    - text: NYC OpenData
+      href: https://data.cityofnewyork.us/Environment/2018-Central-Park-Squirrel-Census   
 ---
 
-In 2023, the United Kingdom's Office for National Statistics published an article titled: "Why do children and young people in smaller towns do better academically than those in larger town?". For 2012-2013 cohort, the study found that students in smaller towns had better educational attainment on average than those in medium or large towns and cities. 
+In 2023, the United Kingdom's Office for National Statistics published an article titled: ["Why do children and young people in smaller towns do better academically than those in larger town?"](https://www.ons.gov.uk/peoplepopulationandcommunity/educationandchildcare/articles/whydochildrenandyoungpeopleinsmallertownsdobetteracademicallythanthoseinlargertowns/2023-07-25). For 2012-2013 cohort, the study found that students in smaller towns had better educational attainment on average than those in medium or large towns and cities. 
 
-The above analysis is observational, so let's test this claim! The ONS has created their own educational score—a summary of standardized test score performance over different points during education—which we will use to represent performance. A score of 0 is the national average: small towns have an average score of 0.4, medium 0.3, and large -0.9. Following the setup of the article, we will compare small towns against other town sizes with permutation testing to evaluate their claim.
-
-```{r}
-english_education <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2024/2024-01-23/english_education.csv')
-```
+The above analysis is observational—let's test this claim to see if it can be generalized to a larger population. The ONS has created their own educational score—a summary of standardized test score performance over different points during education—which we will use to represent performance. A score of 0 is the national average: small towns have an average score of 0.4, medium 0.3, and large -0.9. Following the setup of the article, we will compare small towns against other town sizes with permutation testing to evaluate their claim.
 
 Let's first visualize the data:
 
 ```{r}
 library(tidyverse)
 
+english_education <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2024/2024-01-23/english_education.csv')
+
 #Dummy Variable
 english_education <- english_education |> 
-  mutate(town_size = if_else(size_flag == "Small Towns", "Small", "Medium, Large, City"))
+  mutate(town_size = if_else(size_flag == "Small Towns", "Small Town", "Medium, Large, City"))
 
 english_education |>
   ggplot(aes(x = town_size, y = education_score)) +
@@ -38,25 +40,36 @@ english_education |>
   )
 ```
 
-Let's dig in, is this phenomenon by chance? To do so, we define our null hypothesis: 
+Is this phenomenon by chance? To find out, we define our null hypothesis: 
 
-- H~0~ = Town size has no effect on education score = Education_Score~SmallTown~ = Education_Score~OtherSizes~
+- H~0~ = Town size has no effect on education score = Average_Education_Score~SmallTown~ = Average_Education_Score~OtherSizes~
 
-- H~A~ = Students in small towns perform differently than larger sizes = Education_Score~SmallTown~ $\neq$ Education_Score~OtherSizes~
+- H~A~ = Students in small towns perform differently than larger sizes = Average_Education_Score~SmallTown~ > Average_Education_Score~OtherSizes~
 
-First, we calculate the obserted statistic:
+First, we calculate the observed statistic:
 
 ```{r}
+#testing fancy formatting
+library(knitr)
+
 #calculating the difference in means
 
 mean_diff <- english_education |>
   group_by(town_size) |>
-  summarize(mean(education_score))
+  summarize(mean(education_score)) |>
+  kable(digits = 3,
+        row.names = FALSE,
+        col.names = c("Town Size","Average Education Score"))
+
+mean_diff
 ```
 
-Now, lets shufftle:
+ 
+Now, lets shuffle our data to create a null sampling distribution:
 
 ```{r}
+set.seed(4747)
+
 #shuffle data
 perm_data <- function(repititions, dframe){
   dframe |>
@@ -68,17 +81,30 @@ perm_data <- function(repititions, dframe){
 }
 
 perm_stats <- 
-  map(c(1:100), perm_data, dframe = english_education) |>
+  map(c(1:1000), perm_data, dframe = english_education) |>
   list_rbind()
 
 perm_stats |> 
   ggplot(aes(x = score_diff)) +
   geom_histogram() +
-  geom_vline(aes(xintercept = 0.7408704), color = "red")
+  geom_vline(aes(xintercept = 0.7408704), color = "red") +
+  labs(
+    title = "Education Score Permutation Test",
+    x = "Difference in Score",
+    y = "Number of Observations"
+  )
 ```
 
+Shuffling the data 1,000 times, no trials have a difference between small and larger towns as extreme as our observed statistic. Therefore...
 
+```{r}
+p_value <- perm_stats |> 
+  summarize(p_value = mean(score_diff > 0.7408704))
+```
 
+With a p-value of 0, we can strongly reject the null. Perhaps, this strong finding allows us to generalize the data to a larger population of UK students: the negative relationship of town size and academic performance may hold beyond the sample. 
+
+Data was sourced from [TidyTuesday](https://github.com/rfordatascience/tidytuesday/blob/main/data/2024/2024-01-23/readme.md), January 3rd, 2024. The original data is courtesy of the [UK Office of National Statistics](https://www.ons.gov.uk/). 
 
 
 
