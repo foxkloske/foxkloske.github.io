@@ -1,17 +1,33 @@
 ---
-title: "Project 4: Ethics"
+title: "Taxis, Hashing, and Privacy"
+description: "Privacy flaws of location data in NYC"
 author: Fox Kloske
 date: November 12, 2025
 format: html
+title-block-banner: "media/taxi_cab.png"
+title-block-banner-color: white
 
 #Remove messages/warnings
 code-fold: true
 execute: 
   warning: false
   message: false
-
-  links:
-    - text: To Come
-      href: https://data.cityofnewyork.us/Environment/2018-Central-Park-Squirrel-Census 
 ---
 
+If you rode in a yellow cab in New York City in 2014, details of that ride—date, time, payment, tip—were recorded. After a Freedom of Information Law request by Chris Whong, all 173 million trips on 2014 were released publicly.[^1] What began as curiosity has become a case study of privacy risks in public data: without careful protections, anonymous data is not always anonymous.
+
+Importantly for every trip, this taxi cab data set includes the drivers medallion and hack license number. This inclusion allows rick cab-level analysis: where do drivers have the quickest customer turnaround or how many trips can a driver make in one day? However, as identified by computer scientist Vijay Pandurangan, the anonymization of these values held a crucial error.[^2] 
+
+Both values are stored in the dataset as an MD5 hash, where every input returns the same output. While this may be effective to anonymize some information, both inputs are significantly constrained. For example, license numbers are six or seven digits, and medallion numbers follow specific patterns—combined, there were 22 million possible combinations. Within two minutes, and powerful computing, Pandurangan computed these hashes. Within an hour, the entire dataset was de-anonymized.[^3]
+
+The result is a 173 million rows of personal information. Pandurangan's exercise ended there, but linking license number to driver name or medallion to owner are doable with resources directly from the NYC Taxi and Limousine Commission.[^4] The resulting possibilities raise clear privacy concerns: how much did a specific person make in a year, or where do they likely live?
+
+No ethical boundaries were crossed in the permission structure or data collection (the same information for following years is available without a FOIL request on NYC OpenData today). Instead, the driver's privacy breach reflects a failure in anonymization and lack of care toward preparing data for public release. Further, a lack or complexity of options was not the issue; as Pandurangan suggests, the TLC could assign each driver the same, non-reversible, identifier.
+
+Researchers, policymakers, or interested New Yorkers may be excited about the possibility for increased specificity, but these informational gains come at the cost driver privacy that was not appropriately protected: earnings, routines, and whereabouts all made public. In this specific case, the ethical violation a result of poor data governance, not profit. Benevolent transparency turned into dangerous surveillance of those who produced the data in the first place.
+
+
+[^1]: Chris Whong FOIL post: https://chriswhong.com/open-data/foil_nyc_taxi/
+[^2]: Vijay Pandurangan de-anonymization post: https://medium.com/vijay-pandurangan/of-taxis-and-rainbows-f6bc289679a1
+[^3]: Dan Goodin article: https://arstechnica.com/tech-policy/2014/06/poorly-anonymized-logs-reveal-nyc-cab-drivers-detailed-whereabouts/ 
+[^4]: Hack license to name, NYC TLC: https://www.nyc.gov/html/tlc_medallion_info/html/tlc_lookup.shtml 

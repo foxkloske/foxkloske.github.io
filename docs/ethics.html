@@ -8,8 +8,9 @@
 
 <meta name="author" content="Fox Kloske">
 <meta name="dcterms.date" content="2025-11-12">
+<meta name="description" content="Privacy flaws of location data in NYC">
 
-<title>Project 4: Ethics – Fox Kloske</title>
+<title>Taxis, Hashing, and Privacy – Fox Kloske</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -68,6 +69,24 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<style>
+
+      .quarto-title-block .quarto-title-banner h1,
+      .quarto-title-block .quarto-title-banner h2,
+      .quarto-title-block .quarto-title-banner h3,
+      .quarto-title-block .quarto-title-banner h4,
+      .quarto-title-block .quarto-title-banner h5,
+      .quarto-title-block .quarto-title-banner h6
+      {
+        color: white;
+      }
+
+      .quarto-title-block .quarto-title-banner {
+        color: white;
+background-image: url(media/taxi_cab.png);
+background-size: cover;
+      }
+</style>
 
 
 <link rel="stylesheet" href="styles.css">
@@ -76,7 +95,7 @@ ul.task-list li input[type="checkbox"] {
 <body class="nav-fixed">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
@@ -129,50 +148,71 @@ ul.task-list li input[type="checkbox"] {
     </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-page">
+      <h1 class="title">Taxis, Hashing, and Privacy</h1>
+                  <div>
+        <div class="description">
+          Privacy flaws of location data in NYC
+        </div>
+      </div>
+                </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta column-page">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Fox Kloske </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">November 12, 2025</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
         
     </div>
 <!-- main -->
-<main class="content column-page" id="quarto-document-content">
-
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<h1 class="title">Project 4: Ethics</h1>
-</div>
-
-
-
-<div class="quarto-title-meta column-page">
-
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>Fox Kloske </p>
-          </div>
-  </div>
-    
-    <div>
-    <div class="quarto-title-meta-heading">Published</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">November 12, 2025</p>
-    </div>
-  </div>
-  
-    
-  </div>
-  
-
-
-</header>
+<main class="content quarto-banner-title-block column-page" id="quarto-document-content">
 
 
 
 
 
-</main> <!-- /main -->
+<p>If you rode in a yellow cab in New York City in 2014, details of that ride—date, time, payment, tip—were recorded. After a Freedom of Information Law request by Chris Whong, all 173 million trips on 2014 were released publicly.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> What began as curiosity has become a case study of privacy risks in public data: without careful protections, anonymous data is not always anonymous.</p>
+<p>Importantly for every trip, this taxi cab data set includes the drivers medallion and hack license number. This inclusion allows rick cab-level analysis: where do drivers have the quickest customer turnaround or how many trips can a driver make in one day? However, as identified by computer scientist Vijay Pandurangan, the anonymization of these values held a crucial error.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p>
+<p>Both values are stored in the dataset as an MD5 hash, where every input returns the same output. While this may be effective to anonymize some information, both inputs are significantly constrained. For example, license numbers are six or seven digits, and medallion numbers follow specific patterns—combined, there were 22 million possible combinations. Within two minutes, and powerful computing, Pandurangan computed these hashes. Within an hour, the entire dataset was de-anonymized.<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a></p>
+<p>The result is a 173 million rows of personal information. Pandurangan’s exercise ended there, but linking license number to driver name or medallion to owner are doable with resources directly from the NYC Taxi and Limousine Commission.<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a> The resulting possibilities raise clear privacy concerns: how much did a specific person make in a year, or where do they likely live?</p>
+<p>No ethical boundaries were crossed in the permission structure or data collection (the same information for following years is available without a FOIL request on NYC OpenData today). Instead, the driver’s privacy breach reflects a failure in anonymization and lack of care toward preparing data for public release. Further, a lack or complexity of options was not the issue; as Pandurangan suggests, the TLC could assign each driver the same, non-reversible, identifier.</p>
+<p>Researchers, policymakers, or interested New Yorkers may be excited about the possibility for increased specificity, but these informational gains come at the cost driver privacy that was not appropriately protected: earnings, routines, and whereabouts all made public. In this specific case, the ethical violation a result of poor data governance, not profit. Benevolent transparency turned into dangerous surveillance of those who produced the data in the first place.</p>
+
+
+
+
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>Chris Whong FOIL post: https://chriswhong.com/open-data/foil_nyc_taxi/<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>Vijay Pandurangan de-anonymization post: https://medium.com/vijay-pandurangan/of-taxis-and-rainbows-f6bc289679a1<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>Dan Goodin article: https://arstechnica.com/tech-policy/2014/06/poorly-anonymized-logs-reveal-nyc-cab-drivers-detailed-whereabouts/<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p>Hack license to name, NYC TLC: https://www.nyc.gov/html/tlc_medallion_info/html/tlc_lookup.shtml<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
