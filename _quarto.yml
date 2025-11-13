@@ -18,6 +18,8 @@ website:
         href: txtanalysis.qmd
       - text: "Simulation Study"
         href: SimulationStudy.qmd
+      - text: "Ethics: Data and Power"
+        href: ethics.qmd
 
 format:
   html:

@@ -1,0 +1,17 @@
+---
+title: "Project 4: Ethics"
+author: Fox Kloske
+date: November 12, 2025
+format: html
+
+#Remove messages/warnings
+code-fold: true
+execute: 
+  warning: false
+  message: false
+
+  links:
+    - text: To Come
+      href: https://data.cityofnewyork.us/Environment/2018-Central-Park-Squirrel-Census 
+---
+
