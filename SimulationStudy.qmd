@@ -27,6 +27,10 @@ library(tidyverse)
 
 english_education <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2024/2024-01-23/english_education.csv')
 
+str(english_education)
+glimpse(english_education)
+
+
 #Dummy Variable
 english_education <- english_education |> 
   mutate(town_size = if_else(size_flag == "Small Towns", "Small Town", "Medium, Large, City"))
