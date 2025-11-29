@@ -14,12 +14,14 @@ website:
             href: tidy1.qmd
           - text: "Transit-Infrastructure Costs"
             href: tidy2.qmd
-      - text: "Text Analysis"
+      - text: "Central Park Squirrels"
         href: txtanalysis.qmd
-      - text: "Simulation Study"
+      - text: "English Academic Achievement"
         href: SimulationStudy.qmd
-      - text: "Ethics: Data and Power"
+      - text: "New York City Taxi Cabs"
         href: ethics.qmd
+      - text: "Stanford Open Policing"
+        href: SQLexercise.qmd
 
 format:
   html:
