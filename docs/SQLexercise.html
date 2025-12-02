@@ -6,11 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Fox Kloske">
-<meta name="dcterms.date" content="2025-11-12">
-<meta name="description" content="Privacy flaws of location data in NYC">
 
-<title>Taxis, Hashing, and Privacy – Fox Kloske</title>
+<title>SQLexercise – Fox Kloske</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -22,6 +19,40 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -69,24 +100,6 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-<style>
-
-      .quarto-title-block .quarto-title-banner h1,
-      .quarto-title-block .quarto-title-banner h2,
-      .quarto-title-block .quarto-title-banner h3,
-      .quarto-title-block .quarto-title-banner h4,
-      .quarto-title-block .quarto-title-banner h5,
-      .quarto-title-block .quarto-title-banner h6
-      {
-        color: white;
-      }
-
-      .quarto-title-block .quarto-title-banner {
-        color: white;
-background-image: url(media/taxi_cab.png);
-background-size: cover;
-      }
-</style>
 
 
 <link rel="stylesheet" href="styles.css">
@@ -95,7 +108,7 @@ background-size: cover;
 <body class="nav-fixed">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+  <header id="quarto-header" class="headroom fixed-top">
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
@@ -137,11 +150,11 @@ background-size: cover;
 <span class="menu-text">English Academic Achievement</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="./ethics.html" aria-current="page"> 
+    <a class="nav-link" href="./ethics.html"> 
 <span class="menu-text">New York City Taxi Cabs</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./SQLexercise.html"> 
+    <a class="nav-link active" href="./SQLexercise.html" aria-current="page"> 
 <span class="menu-text">Stanford Open Policing</span></a>
   </li>  
 </ul>
@@ -152,71 +165,82 @@ background-size: cover;
     </nav>
 </header>
 <!-- content -->
-<header id="title-block-header" class="quarto-title-block default page-columns page-full">
-  <div class="quarto-title-banner page-columns page-full">
-    <div class="quarto-title column-page">
-      <h1 class="title">Taxis, Hashing, and Privacy</h1>
-                  <div>
-        <div class="description">
-          Privacy flaws of location data in NYC
-        </div>
-      </div>
-                </div>
-  </div>
-    
-  
-  <div class="quarto-title-meta column-page">
-
-      <div>
-      <div class="quarto-title-meta-heading">Author</div>
-      <div class="quarto-title-meta-contents">
-               <p>Fox Kloske </p>
-            </div>
-    </div>
-      
-      <div>
-      <div class="quarto-title-meta-heading">Published</div>
-      <div class="quarto-title-meta-contents">
-        <p class="date">November 12, 2025</p>
-      </div>
-    </div>
-    
-      
-    </div>
-    
-  
-  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
         
     </div>
 <!-- main -->
-<main class="content quarto-banner-title-block column-page" id="quarto-document-content">
+<main class="content column-page" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">SQLexercise</h1>
+</div>
 
 
 
+<div class="quarto-title-meta column-page">
+
+    
+  
+    
+  </div>
+  
 
 
-<p>If you rode in a yellow cab in New York City in 2014, details of that ride—date, time, payment, tip—were recorded. After a Freedom of Information Law request by Chris Whong, all 173 million trips on 2014 were released publicly.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> What began as curiosity has become a case study of privacy risks in public data: without careful protections, anonymous data is not always anonymous.</p>
-<p>Importantly for every trip, the taxi cab data set includes the drivers medallion and hack license number. This inclusion allows rich cab-level analysis: where do drivers have the quickest customer turnaround or how many trips can a driver make in one day? However, as identified by computer scientist Vijay Pandurangan, the anonymization of these values held a crucial error.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p>
-<p>Both the medallion number and hack license numbers are stored in the dataset as an MD5 hash, where every input returns the same output. While this may be effective to anonymize some unpredictable information, both hashed inputs are significantly patterned. For example, license numbers are six or seven digits, and medallion numbers adhere to specific constraints—combined, there were 22 million possible combinations. Within two minutes, using powerful computing, Pandurangan computed these hashes. Within an hour, the entire dataset was de-anonymized.<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a></p>
-<p>The result is a 173 million rows of personal information. Pandurangan’s exercise ended there, but linking license number to driver name or medallion to owner are doable with resources directly from the NYC Taxi and Limousine Commission.<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a> The resulting possibilities raise clear privacy concerns: how much did a specific person make in a year, or where do they likely live are answerable questions.</p>
-<p>No ethical boundaries were crossed in the permission structure or data collection (the same information for following years is available without a FOIL request on NYC OpenData today). Instead, the driver’s privacy breach reflects a failure in anonymization and lack of care toward preparing data for public release. Further, a lack or complexity of options was not the issue; as Pandurangan suggests, the TLC could assign each driver the same, non-reversible, identifier.</p>
-<p>Researchers, policymakers, or curious New Yorkers may be interested in the possibility for increased specificity, but these informational gains come at the cost driver privacy that was not appropriately protected: earnings, routines, and whereabouts all made public. In this specific case, the ethical violation is a result of poor data governance, not profit. Once benevolent transparency is turned into dangerous surveillance of those who produced the data in the first place.</p>
+</header>
+
+
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>con_traffic <span class="ot">&lt;-</span> DBI<span class="sc">::</span><span class="fu">dbConnect</span>(</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  RMariaDB<span class="sc">::</span><span class="fu">MariaDB</span>(),</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">dbname =</span> <span class="st">"traffic"</span>,</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">host =</span> <span class="fu">Sys.getenv</span>(<span class="st">"TRAFFIC_HOST"</span>),</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">user =</span> <span class="fu">Sys.getenv</span>(<span class="st">"TRAFFIC_USER"</span>),</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">password =</span> <span class="fu">Sys.getenv</span>(<span class="st">"TRAFFIC_PWD"</span>)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-output.var="temp_output">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> `date`, `time`, `arrest_made`</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> ca_san_jose_2020_04_01</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> arrest_made <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="kw">LIMIT</span> <span class="dv">20</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>temp_output</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>         date     time arrest_made
+1  2013-09-01 01:05:19           1
+2  2013-09-01 03:52:09           1
+3  2013-09-01 16:40:13           1
+4  2013-09-01 17:20:19           1
+5  2013-09-01 17:26:27           1
+6  2013-09-01 17:30:36           1
+7  2013-09-01 18:00:30           1
+8  2013-09-01 19:12:32           1
+9  2013-09-01 19:15:09           1
+10 2013-09-01 22:13:22           1
+11 2013-09-01 22:29:39           1
+12 2013-09-01 22:29:39           1
+13 2013-09-01 22:29:39           1
+14 2013-09-01 22:32:13           1
+15 2013-09-01 23:07:16           1
+16 2013-09-01 23:25:19           1
+17 2013-09-01 23:25:19           1
+18 2013-09-01 23:33:22           1
+19 2013-09-01 23:33:22           1
+20 2013-09-01 23:40:11           1</code></pre>
+</div>
+</div>
+<p>Test</p>
 
 
 
-
-<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
-
-<ol>
-<li id="fn1"><p>Chris Whong FOIL post: https://chriswhong.com/open-data/foil_nyc_taxi/<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn2"><p>Vijay Pandurangan de-anonymization post: https://medium.com/vijay-pandurangan/of-taxis-and-rainbows-f6bc289679a1<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn3"><p>Dan Goodin article: https://arstechnica.com/tech-policy/2014/06/poorly-anonymized-logs-reveal-nyc-cab-drivers-detailed-whereabouts/<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn4"><p>Hack license to name, NYC TLC: https://www.nyc.gov/html/tlc_medallion_info/html/tlc_lookup.shtml<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-</ol>
-</section></div></main> <!-- /main -->
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
