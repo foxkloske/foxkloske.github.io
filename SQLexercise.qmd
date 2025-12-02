@@ -1,6 +1,11 @@
 ---
-title: "SQLexercise"
+title: "California Policing"
+description: "Using SQL to compare policing statistics"
+author: Fox Kloske
+date: December 1, 2025
 format: html
+title-block-banner: "media/CA_highway.png"
+title-block-banner-color: white
 
 #Remove messages/warnings
 code-fold: true
@@ -8,6 +13,8 @@ execute:
   warning: false
   message: false
 ---
+
+The Stanford Open Policing Project of nearly 100 million traffic stops across the United States. This page uses California data to think critically about how different areas police.
 
 ```{r}
 con_traffic <- DBI::dbConnect(
@@ -20,7 +27,7 @@ con_traffic <- DBI::dbConnect(
 )
 ```
 
-TKTK
+A note: understanding policing goes far beyond statistics. For example, community trust and relationships are difficult to quantify. The following is not meant to be comprehensive, but descriptive. For this project, I'd like to think about how traffic stops escalate. First, for the cities with available data, how many traffic stops result in a search? 
 
 ```{sql, connection = con_traffic, output.var = "temp_output"}
 
@@ -28,7 +35,8 @@ SELECT
   'Oakland' AS PoliceDepartment,
   COUNT(*) AS numStops,
   SUM(search_conducted) AS numSearches,
-  AVG(search_conducted) AS pctSearches
+  AVG(search_conducted) AS pctSearches,
+  COUNT(*) / 440983 AS searchesByPop
 FROM ca_oakland_2020_04_01
 
 UNION
@@ -37,7 +45,8 @@ SELECT
   'San Diego' AS PoliceDepartment,
   COUNT(*) AS numStops,
   SUM(search_conducted) AS numSearches,
-  AVG(search_conducted) AS pctSearches
+  AVG(search_conducted) AS pctSearches,
+  COUNT(*) / 1386932 AS searchesByPop
 FROM ca_san_diego_2020_04_01
 
 UNION
@@ -46,7 +55,8 @@ SELECT
   'San Francisco' AS PoliceDepartment,
   COUNT(*) AS numStops,
   SUM(search_conducted) AS numSearches,
-  AVG(search_conducted) AS pctSearches
+  AVG(search_conducted) AS pctSearches,
+  COUNT(*) / 827526 AS searchesByPop
 FROM ca_san_francisco_2020_04_01
 
 UNION
@@ -55,7 +65,8 @@ SELECT
   'San Jose' AS PoliceDepartment,
   COUNT(*) AS numStops,
   SUM(search_conducted) AS numSearches,
-  AVG(search_conducted) AS pctSearches
+  AVG(search_conducted) AS pctSearches,
+  COUNT(*) / 997368 AS searchesByPop
 FROM ca_san_jose_2020_04_01
 
 UNION
@@ -64,32 +75,38 @@ SELECT
   'Stockton' AS PoliceDepartment,
   COUNT(*) AS numStops,
   SUM(search_conducted) AS numSearches,
-  AVG(search_conducted) AS pctSearches
+  AVG(search_conducted) AS pctSearches,
+  COUNT(*) / 324975 AS searchesByPop
 FROM ca_stockton_2020_04_01;
 ```
+
 
 ```{r}
 library(ggplot2)
  library(dplyr)
 
+temp_output <- temp_output |>
+  mutate(searchesByPop = searchesByPop*100) |>
+  mutate(pctSearches = pctSearches*100)
+
+names(temp_output) <- 
+  c("Police_Department", "Number_of_Stops", "Number_of_Searches", "Percentage_of_Searches", "Stops_by_Population (%)")
+
+temp_output
+```
+
+TKTK
+
+```{r}
+
 temp_output |> 
-  mutate(pctSearches = pctSearches*100) |>
-  ggplot(aes(x = PoliceDepartment, y = pctSearches, fill = PoliceDepartment)) +
+  ggplot(aes(x = Police_Department, y = Percentage_of_Searches, fill = Police_Department)) +
   geom_col() + 
   labs(
     title = "Percentage of Stops that Lead to a Search",
     x = "Police Department",
     y = "Search Rate (%)") + 
     theme(legend.position = "none")
-```
-
-TKTK
-
-```{r}
-names(temp_output) <- 
-  c("Police Department", "Number of Stops", "Number of Searches", "Percentage of Searches")
-
-temp_output
 ```
 
 TKTK

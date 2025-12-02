@@ -6,8 +6,6 @@ website:
   title: "Fox Kloske"
   navbar:
     left:
-      - text: "Home"     
-        href: index.qmd
       - text: "Data Viz"
         menu:
           - text: "United States Spending on Children"
