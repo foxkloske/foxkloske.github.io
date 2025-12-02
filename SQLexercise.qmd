@@ -1,6 +1,12 @@
 ---
 title: "SQLexercise"
 format: html
+
+#Remove messages/warnings
+code-fold: true
+execute: 
+  warning: false
+  message: false
 ---
 
 ```{r}
@@ -14,11 +20,13 @@ con_traffic <- DBI::dbConnect(
 )
 ```
 
+TKTK
+
 ```{sql, connection = con_traffic, output.var = "temp_output"}
 
 SELECT
   'Oakland' AS PoliceDepartment,
-  SUM(1) AS numStops,
+  COUNT(*) AS numStops,
   SUM(search_conducted) AS numSearches,
   AVG(search_conducted) AS pctSearches
 FROM ca_oakland_2020_04_01
@@ -27,7 +35,7 @@ UNION
 
 SELECT
   'San Diego' AS PoliceDepartment,
-  SUM(1) AS numStops,
+  COUNT(*) AS numStops,
   SUM(search_conducted) AS numSearches,
   AVG(search_conducted) AS pctSearches
 FROM ca_san_diego_2020_04_01
@@ -36,7 +44,7 @@ UNION
 
 SELECT
   'San Francisco' AS PoliceDepartment,
-  SUM(1) AS numStops,
+  COUNT(*) AS numStops,
   SUM(search_conducted) AS numSearches,
   AVG(search_conducted) AS pctSearches
 FROM ca_san_francisco_2020_04_01
@@ -45,7 +53,7 @@ UNION
 
 SELECT
   'San Jose' AS PoliceDepartment,
-  SUM(1) AS numStops,
+  COUNT(*) AS numStops,
   SUM(search_conducted) AS numSearches,
   AVG(search_conducted) AS pctSearches
 FROM ca_san_jose_2020_04_01
@@ -54,22 +62,114 @@ UNION
 
 SELECT
   'Stockton' AS PoliceDepartment,
-  SUM(1) AS numStops,
+  COUNT(*) AS numStops,
   SUM(search_conducted) AS numSearches,
   AVG(search_conducted) AS pctSearches
-FROM ca_stockton_2020_04_01
+FROM ca_stockton_2020_04_01;
+```
+
+```{r}
+library(ggplot2)
+ library(dplyr)
+
+temp_output |> 
+  mutate(pctSearches = pctSearches*100) |>
+  ggplot(aes(x = PoliceDepartment, y = pctSearches, fill = PoliceDepartment)) +
+  geom_col() + 
+  labs(
+    title = "Percentage of Stops that Lead to a Search",
+    x = "Police Department",
+    y = "Search Rate (%)") + 
+    theme(legend.position = "none")
+```
+
+TKTK
+
+```{r}
+names(temp_output) <- 
+  c("Police Department", "Number of Stops", "Number of Searches", "Percentage of Searches")
+
+temp_output
+```
+
+TKTK
+
+```{sql, connection = con_traffic, output.var = "temp_output2"}
+
+#WHERE does not work inside SUM, instead this new syntax: CASE WHEN, THEN, ELSE, END
+SELECT
+  'Oakland' AS PoliceDepartment,
+  SUM(CASE WHEN search_conducted = 1 AND citation_issued = 1 THEN 1 ELSE 0 END) AS searchToCitation,
+  SUM(CASE WHEN search_conducted = 1 AND arrest_made = 1 THEN 1 ELSE 0 END) AS searchToArrest,
+  AVG(CASE WHEN search_conducted = 1 AND citation_issued = 1 THEN 1 ELSE 0 END) AS searchToCitationPercent,
+  AVG(CASE WHEN search_conducted = 1 AND arrest_made = 1 THEN 1 ELSE 0 END) AS searchToArrestPercent
+FROM ca_oakland_2020_04_01
 
 UNION
 
 SELECT
-  'State Patrol' AS PoliceDepartment,
-  SUM(1) AS numStops,
-  SUM(search_conducted) AS numSearches,
-  AVG(search_conducted) AS pctSearches
-FROM ca_statewide_2023_01_26;
+  'San Diego' AS PoliceDepartment,
+  SUM(CASE WHEN search_conducted = 1 AND citation_issued = 1 THEN 1 ELSE 0 END) AS searchToCitation,
+  SUM(CASE WHEN search_conducted = 1 AND arrest_made = 1 THEN 1 ELSE 0 END) AS searchToArrest,
+  AVG(CASE WHEN search_conducted = 1 AND citation_issued = 1 THEN 1 ELSE 0 END) AS searchToCitationPercent,
+  AVG(CASE WHEN search_conducted = 1 AND arrest_made = 1 THEN 1 ELSE 0 END) AS searchToArrestPercent
+FROM ca_san_diego_2020_04_01
+
+UNION
+
+SELECT
+  'San Francisco' AS PoliceDepartment,
+  SUM(CASE WHEN search_conducted = 1 AND citation_issued = 1 THEN 1 ELSE 0 END) AS searchToCitation,
+  SUM(CASE WHEN search_conducted = 1 AND arrest_made = 1 THEN 1 ELSE 0 END) AS searchToArrest,
+  AVG(CASE WHEN search_conducted = 1 AND citation_issued = 1 THEN 1 ELSE 0 END) AS searchToCitationPercent,
+  AVG(CASE WHEN search_conducted = 1 AND arrest_made = 1 THEN 1 ELSE 0 END) AS searchToArrestPercent
+FROM ca_san_francisco_2020_04_01
+
+UNION
+
+SELECT
+  'San Jose' AS PoliceDepartment,
+  SUM(CASE WHEN search_conducted = 1 AND citation_issued = 1 THEN 1 ELSE 0 END) AS searchToCitation,
+  SUM(CASE WHEN search_conducted = 1 AND arrest_made = 1 THEN 1 ELSE 0 END) AS searchToArrest,
+  AVG(CASE WHEN search_conducted = 1 AND citation_issued = 1 THEN 1 ELSE 0 END) AS searchToCitationPercent,
+  AVG(CASE WHEN search_conducted = 1 AND arrest_made = 1 THEN 1 ELSE 0 END) AS searchToArrestPercent
+FROM ca_san_jose_2020_04_01
+
+UNION
+
+SELECT
+  'Stockton' AS PoliceDepartment,
+  SUM(CASE WHEN search_conducted = 1 AND citation_issued = 1 THEN 1 ELSE 0 END) AS searchToCitation,
+  SUM(CASE WHEN search_conducted = 1 AND arrest_made = 1 THEN 1 ELSE 0 END) AS searchToArrest,
+  AVG(CASE WHEN search_conducted = 1 AND citation_issued = 1 THEN 1 ELSE 0 END) AS searchToCitationPercent,
+  AVG(CASE WHEN search_conducted = 1 AND arrest_made = 1 THEN 1 ELSE 0 END) AS searchToArrestPercent
+FROM ca_stockton_2020_04_01;
 ```
 
 ```{r}
-temp_output
+library(tidyverse)
+
+temp_output2 |> 
+  mutate(searchToCitationPercent = searchToCitationPercent*100, searchToArrestPercent = searchToArrestPercent*100) |>
+  #Wow, I new pivots would come in handy!
+  pivot_longer(
+    cols = c(searchToCitationPercent, searchToArrestPercent),
+    names_to = "searchResult",
+    values_to = "resultPercent") |>
+  ggplot(aes(x = PoliceDepartment, y = resultPercent, fill = searchResult)) +
+  #Dodge staggers the percents
+  geom_col(position="dodge") + 
+  labs(
+    title = "Percentage of Stops that Lead to a Search",
+    x = "Police Department",
+    y = "Search Rate (%)") + 
+    theme(legend.position = "none")
 ```
-Testing 
+
+TKTK
+
+```{r}
+temp_output2
+
+DBI::dbDisconnect(con_traffic)
+```
