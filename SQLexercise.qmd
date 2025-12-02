@@ -16,11 +16,57 @@ con_traffic <- DBI::dbConnect(
 
 ```{sql, connection = con_traffic, output.var = "temp_output"}
 
-SELECT `date`, `time`, `arrest_made`
-FROM ca_san_jose_2020_04_01
-WHERE arrest_made = 1
-LIMIT 20
+SELECT
+  'Oakland' AS PoliceDepartment,
+  SUM(1) AS numStops,
+  SUM(search_conducted) AS numSearches,
+  AVG(search_conducted) AS pctSearches
+FROM ca_oakland_2020_04_01
 
+UNION
+
+SELECT
+  'San Diego' AS PoliceDepartment,
+  SUM(1) AS numStops,
+  SUM(search_conducted) AS numSearches,
+  AVG(search_conducted) AS pctSearches
+FROM ca_san_diego_2020_04_01
+
+UNION
+
+SELECT
+  'San Francisco' AS PoliceDepartment,
+  SUM(1) AS numStops,
+  SUM(search_conducted) AS numSearches,
+  AVG(search_conducted) AS pctSearches
+FROM ca_san_francisco_2020_04_01
+
+UNION
+
+SELECT
+  'San Jose' AS PoliceDepartment,
+  SUM(1) AS numStops,
+  SUM(search_conducted) AS numSearches,
+  AVG(search_conducted) AS pctSearches
+FROM ca_san_jose_2020_04_01
+
+UNION
+
+SELECT
+  'Stockton' AS PoliceDepartment,
+  SUM(1) AS numStops,
+  SUM(search_conducted) AS numSearches,
+  AVG(search_conducted) AS pctSearches
+FROM ca_stockton_2020_04_01
+
+UNION
+
+SELECT
+  'State Patrol' AS PoliceDepartment,
+  SUM(1) AS numStops,
+  SUM(search_conducted) AS numSearches,
+  AVG(search_conducted) AS pctSearches
+FROM ca_statewide_2023_01_26;
 ```
 
 ```{r}
