@@ -14,3 +14,16 @@ con_traffic <- DBI::dbConnect(
 )
 ```
 
+```{sql, connection = con_traffic, output.var = "temp_output"}
+
+SELECT `date`, `time`, `arrest_made`
+FROM ca_san_jose_2020_04_01
+WHERE arrest_made = 1
+LIMIT 20
+
+```
+
+```{r}
+temp_output
+```
+
