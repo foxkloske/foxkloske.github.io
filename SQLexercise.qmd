@@ -14,7 +14,13 @@ execute:
   message: false
 ---
 
-The Stanford Open Policing Project of nearly 100 million traffic stops across the United States. This page uses California data to think critically about how different areas police.
+The Stanford Open Policing Project compiled a database of nearly 100 million traffic stops conducted across the United States during the 2010s. This analysis focuses on data from several cities in California to explore how different cities experience policing.
+
+
+A note: understanding policing goes far beyond statistics. Community trust, relationships, and historical context are critical to evaluating policing, yet difficult to quantify. The following analysis is therefore descriptive and not meant to be exhaustive. 
+
+
+In particular, I'd like to think about how traffic stops escalate. First, among the cities with available data, how many traffic stops lead to a search? Feel free to check out the code below:
 
 ```{r}
 con_traffic <- DBI::dbConnect(
@@ -27,7 +33,6 @@ con_traffic <- DBI::dbConnect(
 )
 ```
 
-A note: understanding policing goes far beyond statistics. For example, community trust and relationships are difficult to quantify. The following is not meant to be comprehensive, but descriptive. For this project, I'd like to think about how traffic stops escalate. First, for the cities with available data, how many traffic stops result in a search? 
 
 ```{sql, connection = con_traffic, output.var = "temp_output"}
 
@@ -36,7 +41,8 @@ SELECT
   COUNT(*) AS numStops,
   SUM(search_conducted) AS numSearches,
   AVG(search_conducted) AS pctSearches,
-  COUNT(*) / 440983 AS searchesByPop
+  -- The following line is not efficient, but added to do as much data wrangling in SQL per assignment
+  COUNT(*) / (440983*4) AS searchesByPop
 FROM ca_oakland_2020_04_01
 
 UNION
@@ -46,7 +52,7 @@ SELECT
   COUNT(*) AS numStops,
   SUM(search_conducted) AS numSearches,
   AVG(search_conducted) AS pctSearches,
-  COUNT(*) / 1386932 AS searchesByPop
+  COUNT(*) / (1386932*4) AS searchesByPop
 FROM ca_san_diego_2020_04_01
 
 UNION
@@ -56,7 +62,7 @@ SELECT
   COUNT(*) AS numStops,
   SUM(search_conducted) AS numSearches,
   AVG(search_conducted) AS pctSearches,
-  COUNT(*) / 827526 AS searchesByPop
+  COUNT(*) / (827526*10) AS searchesByPop
 FROM ca_san_francisco_2020_04_01
 
 UNION
@@ -66,7 +72,7 @@ SELECT
   COUNT(*) AS numStops,
   SUM(search_conducted) AS numSearches,
   AVG(search_conducted) AS pctSearches,
-  COUNT(*) / 997368 AS searchesByPop
+  COUNT(*) / (997368*5) AS searchesByPop
 FROM ca_san_jose_2020_04_01
 
 UNION
@@ -76,28 +82,38 @@ SELECT
   COUNT(*) AS numStops,
   SUM(search_conducted) AS numSearches,
   AVG(search_conducted) AS pctSearches,
-  COUNT(*) / 324975 AS searchesByPop
+  COUNT(*) / (324975*5) AS searchesByPop
 FROM ca_stockton_2020_04_01;
 ```
 
+Two variables between cities muddy our results. One, data is collected over varying amounts of time: policing data for San Francisco is available for 10 years, whereas data for San Diego is available for four. Second, the sizes of the cities considered vary significantly: Stockton is more than one million less residents. Stops by population represents the proportion of stops to residents per year. 
 
 ```{r}
 library(ggplot2)
- library(dplyr)
+library(dplyr)
+library(knitr)
+
 
 temp_output <- temp_output |>
   mutate(searchesByPop = searchesByPop*100) |>
   mutate(pctSearches = pctSearches*100)
 
-names(temp_output) <- 
-  c("Police_Department", "Number_of_Stops", "Number_of_Searches", "Percentage_of_Searches", "Stops_by_Population (%)")
+#Fancy Tables! Yay!
+display <- temp_output |>
+  kable(row.names = FALSE,
+        col.names = c("Police_Department", "Number_of_Stops", "Number_of_Searches", "Percentage_of_Searches", "Stops_by_Population (%)"))
 
-temp_output
+display
 ```
 
-TKTK
+
+There are differences in both how many stops a police department makes and how often those stops lead to vehicle searches. San Jose, for example, makes relatively little stops, but a high number of them lead to searches. Oakland ranks highly in both catagories.
+
 
 ```{r}
+
+names(temp_output) <- 
+  c("Police_Department", "Number_of_Stops", "Number_of_Searches", "Percentage_of_Searches", "Stops_by_Population (%)")
 
 temp_output |> 
   ggplot(aes(x = Police_Department, y = Percentage_of_Searches, fill = Police_Department)) +
@@ -108,8 +124,6 @@ temp_output |>
     y = "Search Rate (%)") + 
     theme(legend.position = "none")
 ```
-
-TKTK
 
 ```{sql, connection = con_traffic, output.var = "temp_output2"}
 
@@ -163,11 +177,24 @@ SELECT
 FROM ca_stockton_2020_04_01;
 ```
 
+Let's dig deeper, how many of these searches find something? How many lead to ciations? How many lead to arrests?
+
+```{r}
+
+temp_output2 |> 
+  mutate(searchToCitationPercent = searchToCitationPercent*100, searchToArrestPercent = searchToArrestPercent*100) |>
+  kable(row.names = FALSE,
+        col.names = c("Police_Department", "Search that Leads to Citation", "Search that Leads to Arrest", "Search to Citation (%)", "Search to Arrest (%)"))
+```
+
+
+Oakland leads both escalatory categories: the highest percentage of stops that lead to searches and searches that lead to arrests. Further, Oakland is the only police department measured where more stops lead to arrests than citations. 
+
+
 ```{r}
 library(tidyverse)
 
 temp_output2 |> 
-  mutate(searchToCitationPercent = searchToCitationPercent*100, searchToArrestPercent = searchToArrestPercent*100) |>
   #Wow, I new pivots would come in handy!
   pivot_longer(
     cols = c(searchToCitationPercent, searchToArrestPercent),
@@ -183,10 +210,6 @@ temp_output2 |>
     theme(legend.position = "none")
 ```
 
-TKTK
-
 ```{r}
-temp_output2
-
 DBI::dbDisconnect(con_traffic)
 ```
