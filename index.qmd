@@ -1,6 +1,6 @@
 ---
 title: "Fox Kloske"
-image: media/img_1236.jpg
+image: media/img_5246.png
 format: 
   html: 
     theme: superhero

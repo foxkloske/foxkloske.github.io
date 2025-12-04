@@ -6,20 +6,20 @@ website:
   title: "Fox Kloske"
   navbar:
     left:
-      - text: "Data Viz"
+      - text: "Data Exercises"
         menu:
+          - text: "English Academic Achievement"
+            href: SimulationStudy.qmd
+          - text: "Stanford Open Policing"
+            href: SQLexercise.qmd
+          - text: "New York City Taxi Cabs"
+            href: ethics.qmd
+          - text: "Central Park Squirrels"
+            href: txtanalysis.qmd
           - text: "United States Spending on Children"
             href: tidy1.qmd
           - text: "Transit-Infrastructure Costs"
             href: tidy2.qmd
-      - text: "Central Park Squirrels"
-        href: txtanalysis.qmd
-      - text: "English Academic Achievement"
-        href: SimulationStudy.qmd
-      - text: "New York City Taxi Cabs"
-        href: ethics.qmd
-      - text: "Stanford Open Policing"
-        href: SQLexercise.qmd
 
 format:
   html:
@@ -30,4 +30,3 @@ format:
     page-layout: full
 
 editor: visual
-

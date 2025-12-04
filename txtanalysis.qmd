@@ -1,9 +1,12 @@
 ---
 title: "Central Park Squirrel Census"
-description: Using str() functions and regular expressions to discover what Central Park squirrels were doing in Junuary 2018.
+description: "Using regular expressions to learn about squirrels in Junuary 2018"
 author: Fox Kloske
 date: October 8, 2025
 format: html
+title-block-banner: "media/squirrel.png"
+title-block-banner-color: white
+
 
 #Remove messages/warnings
 code-fold: true

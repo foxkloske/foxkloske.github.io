@@ -8,7 +8,7 @@
 
 <meta name="author" content="Fox Kloske">
 <meta name="dcterms.date" content="2025-10-08">
-<meta name="description" content="Using str() functions and regular expressions to discover what Central Park squirrels were doing in Junuary 2018.">
+<meta name="description" content="Using regular expressions to learn about squirrels in Junuary 2018">
 
 <title>Central Park Squirrel Census – Fox Kloske</title>
 <style>
@@ -102,6 +102,24 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "Search"
   }
 }</script>
+<style>
+
+      .quarto-title-block .quarto-title-banner h1,
+      .quarto-title-block .quarto-title-banner h2,
+      .quarto-title-block .quarto-title-banner h3,
+      .quarto-title-block .quarto-title-banner h4,
+      .quarto-title-block .quarto-title-banner h5,
+      .quarto-title-block .quarto-title-banner h6
+      {
+        color: white;
+      }
+
+      .quarto-title-block .quarto-title-banner {
+        color: white;
+background-image: url(media/squirrel.png);
+background-size: cover;
+      }
+</style>
 
 
 <link rel="stylesheet" href="styles.css">
@@ -110,7 +128,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <body class="nav-fixed">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
@@ -125,10 +143,26 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-data-viz" role="link" data-bs-toggle="dropdown" aria-expanded="false">
- <span class="menu-text">Data Viz</span>
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-data-exercises" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Data Exercises</span>
     </a>
-    <ul class="dropdown-menu" aria-labelledby="nav-menu-data-viz">    
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-data-exercises">    
+        <li>
+    <a class="dropdown-item" href="./SimulationStudy.html">
+ <span class="dropdown-text">English Academic Achievement</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./SQLexercise.html">
+ <span class="dropdown-text">Stanford Open Policing</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./ethics.html">
+ <span class="dropdown-text">New York City Taxi Cabs</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./txtanalysis.html">
+ <span class="dropdown-text">Central Park Squirrels</span></a>
+  </li>  
         <li>
     <a class="dropdown-item" href="./tidy1.html">
  <span class="dropdown-text">United States Spending on Children</span></a>
@@ -139,22 +173,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>  
     </ul>
   </li>
-  <li class="nav-item">
-    <a class="nav-link active" href="./txtanalysis.html" aria-current="page"> 
-<span class="menu-text">Central Park Squirrels</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="./SimulationStudy.html"> 
-<span class="menu-text">English Academic Achievement</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="./ethics.html"> 
-<span class="menu-text">New York City Taxi Cabs</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="./SQLexercise.html"> 
-<span class="menu-text">Stanford Open Policing</span></a>
-  </li>  
 </ul>
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
@@ -163,36 +181,38 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-page">
+      <h1 class="title">Central Park Squirrel Census</h1>
+                  <div>
+        <div class="description">
+          Using regular expressions to learn about squirrels in Junuary 2018
+        </div>
+      </div>
+                </div>
+  </div>
+  <div class="quarto-title-meta column-page">
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Fox Kloske </p>
+            </div>
+    </div>
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">October 8, 2025</p>
+      </div>
+    </div>
+    </div>
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
     
 <!-- main -->
 <div class="quarto-about-jolla column-page">
- <header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<h1 class="title">Central Park Squirrel Census</h1>
-</div>
-<div>
-  <div class="description">
-    Using str() functions and regular expressions to discover what Central Park squirrels were doing in Junuary 2018.
-  </div>
-</div>
-<div class="quarto-title-meta column-page">
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>Fox Kloske </p>
-          </div>
-  </div>
-    <div>
-    <div class="quarto-title-meta-heading">Published</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">October 8, 2025</p>
-    </div>
-  </div>
-  </div>
-</header><main class="content column-page" id="quarto-document-content">
+ <main class="content quarto-banner-title-block column-page" id="quarto-document-content">
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>

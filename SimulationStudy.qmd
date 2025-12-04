@@ -1,19 +1,18 @@
 ---
 title: "Does Town Size Matter?" 
-description: Undestanding Population and Educational Attainment in the United Kingdom
+description: "Undestanding Population and Educational Attainment in the United Kingdom"
 author: Fox Kloske
 date: October 30, 2025
 format: html
+title-block-banner: "media/notting_hill.png"
+title-block-banner-color: white
+
 
 #Remove messages/warnings
 code-fold: true
 execute: 
   warning: false
   message: false
-
-  links:
-    - text: NYC OpenData
-      href: https://data.cityofnewyork.us/Environment/2018-Central-Park-Squirrel-Census   
 ---
 
 In 2023, the United Kingdom's Office for National Statistics published an article titled: ["Why do children and young people in smaller towns do better academically than those in larger town?"](https://www.ons.gov.uk/peoplepopulationandcommunity/educationandchildcare/articles/whydochildrenandyoungpeopleinsmallertownsdobetteracademicallythanthoseinlargertowns/2023-07-25). For 2012-2013 cohort, the study found that students in smaller towns had better educational attainment on average than those in medium or large towns and cities.
