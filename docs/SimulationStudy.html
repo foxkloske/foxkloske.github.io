@@ -219,130 +219,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>english_education <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">'https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2024/2024-01-23/english_education.csv'</span>)</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(english_education)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-stdout">
-<pre><code>spc_tbl_ [1,104 × 31] (S3: spec_tbl_df/tbl_df/tbl/data.frame)
- $ town11cd                                                         : chr [1:1104] "E34000007" "E34000016" "E34000020" "E34000026" ...
- $ town11nm                                                         : chr [1:1104] "Carlton in Lindrick BUA" "Dorchester (West Dorset) BUA" "Ely BUA" "Market Weighton BUA" ...
- $ population_2011                                                  : num [1:1104] 5456 19060 19090 6429 10884 ...
- $ size_flag                                                        : chr [1:1104] "Small Towns" "Small Towns" "Small Towns" "Small Towns" ...
- $ rgn11nm                                                          : chr [1:1104] "East Midlands" "South West" "East of England" "Yorkshire and The Humber" ...
- $ coastal                                                          : chr [1:1104] "Non-coastal" "Non-coastal" "Non-coastal" "Non-coastal" ...
- $ coastal_detailed                                                 : chr [1:1104] "Smaller non-coastal town" "Smaller non-coastal town" "Smaller non-coastal town" "Smaller non-coastal town" ...
- $ ttwa11cd                                                         : chr [1:1104] "E30000291" "E30000046" "E30000186" "E30000220" ...
- $ ttwa11nm                                                         : chr [1:1104] "Worksop and Retford" "Dorchester and Weymouth" "Cambridge" "Hull" ...
- $ ttwa_classification                                              : chr [1:1104] "Majority town and city (small)" "Majority town and city (small)" "Majority town and city (Large Towns)" "Majority town and city (Large Towns)" ...
- $ job_density_flag                                                 : chr [1:1104] "Residential" "Working" "Working" "Residential" ...
- $ income_flag                                                      : chr [1:1104] "Higher deprivation towns" "Mid deprivation towns" "Lower deprivation towns" "Lower deprivation towns" ...
- $ university_flag                                                  : chr [1:1104] "No university" "No university" "No university" "No university" ...
- $ level4qual_residents35_64_2011                                   : chr [1:1104] "Low" "Medium" "Medium" "Medium" ...
- $ ks4_2012_2013_counts                                             : num [1:1104] 65 239 155 58 93 158 118 235 92 169 ...
- $ key_stage_2_attainment_school_year_2007_to_2008                  : num [1:1104] 65 69.1 71.4 71 78 ...
- $ key_stage_4_attainment_school_year_2012_to_2013                  : num [1:1104] 70.8 71.1 56.1 53.4 62.4 ...
- $ level_2_at_age_18                                                : num [1:1104] 72.3 85.7 83.9 91.2 78.5 ...
- $ level_3_at_age_18                                                : num [1:1104] 50.8 60.1 45.8 49.1 40.9 ...
- $ activity_at_age_19_full_time_higher_education                    : num [1:1104] 30.8 41.8 35.5 25.9 26.9 ...
- $ activity_at_age_19_sustained_further_education                   : num [1:1104] 21.5 13.4 11 25.9 20.4 ...
- $ activity_at_age_19_appprenticeships                              : num [1:1104] NA 10.04 7.74 NA 15.05 ...
- $ activity_at_age_19_employment_with_earnings_above_0              : num [1:1104] 52.3 51 57.4 58.6 55.9 ...
- $ activity_at_age_19_employment_with_earnings_above_10_000         : num [1:1104] 36.9 24.7 27.7 31 30.1 ...
- $ activity_at_age_19_out_of_work                                   : num [1:1104] NA 4.18 NA NA 15.05 ...
- $ highest_level_qualification_achieved_by_age_22_less_than_level_1 : num [1:1104] NA NA NA NA NA NA NA NA NA NA ...
- $ highest_level_qualification_achieved_by_age_22_level_1_to_level_2: num [1:1104] 34.9 21.7 34.4 NA 32.6 29.4 34.5 37.8 19.6 23.7 ...
- $ highest_level_qualification_achieved_by_age_22_level_3_to_level_5: num [1:1104] 39.7 44.6 31.2 66.1 44.2 40 47.9 37.8 47.8 50.9 ...
- $ highest_level_qualification_achieved_by_age_22_level_6_or_above  : num [1:1104] NA 33.3 32.5 NA NA 28.1 NA 23.6 32.6 23.7 ...
- $ highest_level_qualification_achieved_b_age_22_average_score      : num [1:1104] 3.32 3.73 3.55 3.48 3.16 ...
- $ education_score                                                  : num [1:1104] -0.534 1.952 -1.044 -1.249 -1.169 ...
- - attr(*, "spec")=
-  .. cols(
-  ..   town11cd = col_character(),
-  ..   town11nm = col_character(),
-  ..   population_2011 = col_double(),
-  ..   size_flag = col_character(),
-  ..   rgn11nm = col_character(),
-  ..   coastal = col_character(),
-  ..   coastal_detailed = col_character(),
-  ..   ttwa11cd = col_character(),
-  ..   ttwa11nm = col_character(),
-  ..   ttwa_classification = col_character(),
-  ..   job_density_flag = col_character(),
-  ..   income_flag = col_character(),
-  ..   university_flag = col_character(),
-  ..   level4qual_residents35_64_2011 = col_character(),
-  ..   ks4_2012_2013_counts = col_double(),
-  ..   key_stage_2_attainment_school_year_2007_to_2008 = col_double(),
-  ..   key_stage_4_attainment_school_year_2012_to_2013 = col_double(),
-  ..   level_2_at_age_18 = col_double(),
-  ..   level_3_at_age_18 = col_double(),
-  ..   activity_at_age_19_full_time_higher_education = col_double(),
-  ..   activity_at_age_19_sustained_further_education = col_double(),
-  ..   activity_at_age_19_appprenticeships = col_double(),
-  ..   activity_at_age_19_employment_with_earnings_above_0 = col_double(),
-  ..   activity_at_age_19_employment_with_earnings_above_10_000 = col_double(),
-  ..   activity_at_age_19_out_of_work = col_double(),
-  ..   highest_level_qualification_achieved_by_age_22_less_than_level_1 = col_double(),
-  ..   highest_level_qualification_achieved_by_age_22_level_1_to_level_2 = col_double(),
-  ..   highest_level_qualification_achieved_by_age_22_level_3_to_level_5 = col_double(),
-  ..   highest_level_qualification_achieved_by_age_22_level_6_or_above = col_double(),
-  ..   highest_level_qualification_achieved_b_age_22_average_score = col_double(),
-  ..   education_score = col_double()
-  .. )
- - attr(*, "problems")=&lt;externalptr&gt; </code></pre>
-</div>
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(english_education)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-stdout">
-<pre><code>Rows: 1,104
-Columns: 31
-$ town11cd                                                          &lt;chr&gt; "E34…
-$ town11nm                                                          &lt;chr&gt; "Car…
-$ population_2011                                                   &lt;dbl&gt; 5456…
-$ size_flag                                                         &lt;chr&gt; "Sma…
-$ rgn11nm                                                           &lt;chr&gt; "Eas…
-$ coastal                                                           &lt;chr&gt; "Non…
-$ coastal_detailed                                                  &lt;chr&gt; "Sma…
-$ ttwa11cd                                                          &lt;chr&gt; "E30…
-$ ttwa11nm                                                          &lt;chr&gt; "Wor…
-$ ttwa_classification                                               &lt;chr&gt; "Maj…
-$ job_density_flag                                                  &lt;chr&gt; "Res…
-$ income_flag                                                       &lt;chr&gt; "Hig…
-$ university_flag                                                   &lt;chr&gt; "No …
-$ level4qual_residents35_64_2011                                    &lt;chr&gt; "Low…
-$ ks4_2012_2013_counts                                              &lt;dbl&gt; 65, …
-$ key_stage_2_attainment_school_year_2007_to_2008                   &lt;dbl&gt; 65.0…
-$ key_stage_4_attainment_school_year_2012_to_2013                   &lt;dbl&gt; 70.7…
-$ level_2_at_age_18                                                 &lt;dbl&gt; 72.3…
-$ level_3_at_age_18                                                 &lt;dbl&gt; 50.7…
-$ activity_at_age_19_full_time_higher_education                     &lt;dbl&gt; 30.7…
-$ activity_at_age_19_sustained_further_education                    &lt;dbl&gt; 21.5…
-$ activity_at_age_19_appprenticeships                               &lt;dbl&gt; NA, …
-$ activity_at_age_19_employment_with_earnings_above_0               &lt;dbl&gt; 52.3…
-$ activity_at_age_19_employment_with_earnings_above_10_000          &lt;dbl&gt; 36.9…
-$ activity_at_age_19_out_of_work                                    &lt;dbl&gt; NA, …
-$ highest_level_qualification_achieved_by_age_22_less_than_level_1  &lt;dbl&gt; NA, …
-$ highest_level_qualification_achieved_by_age_22_level_1_to_level_2 &lt;dbl&gt; 34.9…
-$ highest_level_qualification_achieved_by_age_22_level_3_to_level_5 &lt;dbl&gt; 39.7…
-$ highest_level_qualification_achieved_by_age_22_level_6_or_above   &lt;dbl&gt; NA, …
-$ highest_level_qualification_achieved_b_age_22_average_score       &lt;dbl&gt; 3.32…
-$ education_score                                                   &lt;dbl&gt; -0.5…</code></pre>
-</div>
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Dummy Variable</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>english_education <span class="ot">&lt;-</span> english_education <span class="sc">|&gt;</span> </span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">town_size =</span> <span class="fu">if_else</span>(size_flag <span class="sc">==</span> <span class="st">"Small Towns"</span>, <span class="st">"Small Town"</span>, <span class="st">"Medium, Large, City"</span>))</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>english_education <span class="sc">|&gt;</span></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> town_size, <span class="at">y =</span> education_score)) <span class="sc">+</span></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span> </span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Visualizing Distribution of Academic Performance by Town Size "</span>,</span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Education Score"</span>,</span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">""</span></span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co">#Dummy Variable</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>english_education <span class="ot">&lt;-</span> english_education <span class="sc">|&gt;</span> </span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">town_size =</span> <span class="fu">if_else</span>(size_flag <span class="sc">==</span> <span class="st">"Small Towns"</span>, <span class="st">"Small Town"</span>, <span class="st">"Medium, Large, City"</span>))</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>english_education <span class="sc">|&gt;</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> town_size, <span class="at">y =</span> education_score)) <span class="sc">+</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span> </span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Visualizing Distribution of Academic Performance by Town Size "</span>,</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Education Score"</span>,</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">""</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div>
@@ -361,19 +250,19 @@ $ education_score                                                   &lt;dbl&gt; 
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">#testing fancy formatting</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr)</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co">#calculating the difference in means</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>mean_diff <span class="ot">&lt;-</span> english_education <span class="sc">|&gt;</span></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(town_size) <span class="sc">|&gt;</span></span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="fu">mean</span>(education_score)) <span class="sc">|&gt;</span></span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>(<span class="at">digits =</span> <span class="dv">3</span>,</span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>        <span class="at">row.names =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>        <span class="at">col.names =</span> <span class="fu">c</span>(<span class="st">"Town Size"</span>,<span class="st">"Average Education Score"</span>))</span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>mean_diff</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">#testing fancy formatting</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co">#calculating the difference in means</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>mean_diff <span class="ot">&lt;-</span> english_education <span class="sc">|&gt;</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(town_size) <span class="sc">|&gt;</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="fu">mean</span>(education_score)) <span class="sc">|&gt;</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>(<span class="at">digits =</span> <span class="dv">3</span>,</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>        <span class="at">row.names =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>        <span class="at">col.names =</span> <span class="fu">c</span>(<span class="st">"Town Size"</span>,<span class="st">"Average Education Score"</span>))</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>mean_diff</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <table class="caption-top table table-sm table-striped small">
@@ -400,31 +289,31 @@ $ education_score                                                   &lt;dbl&gt; 
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">4747</span>)</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co">#shuffle data</span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>perm_data <span class="ot">&lt;-</span> <span class="cf">function</span>(repititions, dframe){</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  dframe <span class="sc">|&gt;</span></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(town_size, education_score) <span class="sc">|&gt;</span></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">perm_town_size =</span> <span class="fu">sample</span>(town_size, <span class="at">replace =</span> <span class="cn">FALSE</span>)) <span class="sc">|&gt;</span></span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(perm_town_size) <span class="sc">|&gt;</span></span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarize</span>(<span class="at">score_mean =</span> <span class="fu">mean</span>(education_score)) <span class="sc">|&gt;</span></span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarize</span>(<span class="at">score_diff =</span> <span class="fu">diff</span>(score_mean))</span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>perm_stats <span class="ot">&lt;-</span> </span>
-<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">map</span>(<span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">1000</span>), perm_data, <span class="at">dframe =</span> english_education) <span class="sc">|&gt;</span></span>
-<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">list_rbind</span>()</span>
-<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>perm_stats <span class="sc">|&gt;</span> </span>
-<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> score_diff)) <span class="sc">+</span></span>
-<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>() <span class="sc">+</span></span>
-<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="fu">aes</span>(<span class="at">xintercept =</span> <span class="fl">0.7408704</span>), <span class="at">color =</span> <span class="st">"red"</span>) <span class="sc">+</span></span>
-<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Education Score Permutation Test"</span>,</span>
-<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Difference in Score"</span>,</span>
-<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Number of Observations"</span></span>
-<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">4747</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co">#shuffle data</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>perm_data <span class="ot">&lt;-</span> <span class="cf">function</span>(repititions, dframe){</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  dframe <span class="sc">|&gt;</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(town_size, education_score) <span class="sc">|&gt;</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">perm_town_size =</span> <span class="fu">sample</span>(town_size, <span class="at">replace =</span> <span class="cn">FALSE</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(perm_town_size) <span class="sc">|&gt;</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarize</span>(<span class="at">score_mean =</span> <span class="fu">mean</span>(education_score)) <span class="sc">|&gt;</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarize</span>(<span class="at">score_diff =</span> <span class="fu">diff</span>(score_mean))</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>perm_stats <span class="ot">&lt;-</span> </span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">map</span>(<span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">1000</span>), perm_data, <span class="at">dframe =</span> english_education) <span class="sc">|&gt;</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">list_rbind</span>()</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>perm_stats <span class="sc">|&gt;</span> </span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> score_diff)) <span class="sc">+</span></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>() <span class="sc">+</span></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="fu">aes</span>(<span class="at">xintercept =</span> <span class="fl">0.7408704</span>), <span class="at">color =</span> <span class="st">"red"</span>) <span class="sc">+</span></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Education Score Permutation Test"</span>,</span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Difference in Score"</span>,</span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Number of Observations"</span></span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div>
@@ -438,8 +327,8 @@ $ education_score                                                   &lt;dbl&gt; 
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>p_value <span class="ot">&lt;-</span> perm_stats <span class="sc">|&gt;</span> </span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">p_value =</span> <span class="fu">mean</span>(score_diff <span class="sc">&gt;</span> <span class="fl">0.7408704</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>p_value <span class="ot">&lt;-</span> perm_stats <span class="sc">|&gt;</span> </span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">p_value =</span> <span class="fu">mean</span>(score_diff <span class="sc">&gt;</span> <span class="fl">0.7408704</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <p>With a p-value of 0, we can strongly reject the null. Perhaps, this strong finding allows us to generalize the data to a larger population of UK students: the negative relationship of town size and academic performance may hold beyond the sample.</p>
