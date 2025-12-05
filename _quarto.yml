@@ -4,6 +4,7 @@ project:
 
 website:
   title: "Fox Kloske"
+  favicon: media/fox.jpg
   navbar:
     left:
       - text: "Data Exercises"
