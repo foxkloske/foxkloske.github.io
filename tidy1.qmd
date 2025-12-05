@@ -31,7 +31,7 @@ national_average <- kids |>
   group_by(year, variable) |>
   
   #Isolate four categories of interest
-  filter(variable == "Lib" |
+  filter(variable == "lib" |
          variable == "PK12ed" |
          variable == "Medicaid_CHIP" |
          variable == "parkrec") |>
