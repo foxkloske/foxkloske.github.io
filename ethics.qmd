@@ -1,6 +1,6 @@
 ---
 title: "Taxis, Hashing, and Privacy"
-description: "Privacy flaws of location data in NYC"
+description: "An Example of Data Storytelling"
 author: Fox Kloske
 date: November 12, 2025
 format: html

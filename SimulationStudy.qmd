@@ -1,6 +1,6 @@
 ---
-title: "Does Town Size Matter?" 
-description: "Undestanding Population and Educational Attainment in the United Kingdom"
+title: "Undestanding Population and Educational Attainment in the United Kingdom" 
+description: "An Example of Statistical Analysis"
 author: Fox Kloske
 date: October 30, 2025
 format: html

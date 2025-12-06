@@ -1,0 +1,17 @@
+{
+  "hash": "49170109ca4b9056b00c7b95d5dbefb3",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"United States Spending on Kids\"\ndescription: Census survey data of spending on children from 1997 through 2016.\nauthor: Fox Kloske\ndate: September 24, 2025\nformat: html\ntitle-block-banner: \"media/school.png\"\ntitle-block-banner-color: white\n\n#Remove messages/warnings\ncode-fold: true\nexecute: \n  warning: false\n  message: false\n---\n\n::: {.cell}\n\n```{.r .cell-code}\nlibrary(tidyverse)\n\n#Borrowed from TidyTuesday instructions\nkids <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2020/2020-09-15/kids.csv')\n\nnational_average <- kids |>\n  group_by(year, variable) |>\n  \n  #Isolate four categories of interest\n  filter(variable == \"lib\" |\n         variable == \"PK12ed\" |\n         variable == \"Medicaid_CHIP\" |\n         variable == \"parkrec\") |>\n  summarize(inf_adj_perchild = mean(inf_adj_perchild)) |>\n  mutate(\n    variable = recode(variable,\n      lib = \"Libraries\",\n      PK12ed = \"PreK–12 Education\",\n      Medicaid_CHIP = \"Medicaid/CHIP\",\n      parkrec = \"Parks & Recreation\"\n    )\n  )\n\nggplot(national_average, aes(x = year, y = inf_adj_perchild)) +\n  geom_line(aes(color = variable)) +\n  facet_wrap(~ variable) +\n  labs(\n    title = \"National Spending on Children by Year (Inflation Adjusted)\",\n    x = \"Year\",\n    y = \"Spending Per Child (Inflation Adjusted $)\"\n  ) +\n  \n  #Centered format\n  theme(legend.position = \"none\")\n```\n\n::: {.cell-output-display}\n![](tidy1_files/figure-html/unnamed-chunk-1-1.png){width=672}\n:::\n:::\n\n\n\n\nData is courtesy of the TidyTuesday [^1] and the Urban Institute.[^2]\n\n[^1]: Tidy Tuesday: <https://github.com/rfordatascience/tidytuesday/blob/main/data/2020/2020-09-15/readme.md>\n\n[^2]: Urban Institute: <https://datacatalog.urban.org/dataset/state-state-spending-kids-dataset>\n",
+    "supporting": [
+      "tidy1_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

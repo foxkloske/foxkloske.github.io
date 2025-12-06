@@ -67,6 +67,13 @@
     "href": "tidy1.html",
     "title": "United States Spending on Kids",
     "section": "",
-    "text": "Code\nlibrary(tidyverse)\n\n#Borrowed from TidyTuesday instructions\nkids &lt;- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2020/2020-09-15/kids.csv')\n\nnational_average &lt;- kids |&gt;\n  group_by(year, variable) |&gt;\n  \n  #Isolate four categories of interest\n  filter(variable == \"lib\" |\n         variable == \"PK12ed\" |\n         variable == \"Medicaid_CHIP\" |\n         variable == \"parkrec\") |&gt;\n  summarize(inf_adj_perchild = mean(inf_adj_perchild))\n\nggplot(national_average, aes(x = year, y = inf_adj_perchild)) +\n  geom_line(aes(color = variable)) +\n  facet_wrap(~ variable) +\n  labs(\n    title = \"National Spending on Children by Year (Inflation Adjusted)\",\n    x = \"Year\",\n    y = \"Spending Per Child (Inflation Adjusted $)\"\n  ) +\n  \n  #Centered format\n  theme(legend.position = \"none\")\n\n\n\n\n\n\n\n\n\nData is courtesy of the TidyTuesday via the Urban Institute:"
+    "text": "Code\nlibrary(tidyverse)\n\n#Borrowed from TidyTuesday instructions\nkids &lt;- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2020/2020-09-15/kids.csv')\n\nnational_average &lt;- kids |&gt;\n  group_by(year, variable) |&gt;\n  \n  #Isolate four categories of interest\n  filter(variable == \"lib\" |\n         variable == \"PK12ed\" |\n         variable == \"Medicaid_CHIP\" |\n         variable == \"parkrec\") |&gt;\n  summarize(inf_adj_perchild = mean(inf_adj_perchild)) |&gt;\n  mutate(\n    variable = recode(variable,\n      lib = \"Libraries\",\n      PK12ed = \"PreK–12 Education\",\n      Medicaid_CHIP = \"Medicaid/CHIP\",\n      parkrec = \"Parks & Recreation\"\n    )\n  )\n\nggplot(national_average, aes(x = year, y = inf_adj_perchild)) +\n  geom_line(aes(color = variable)) +\n  facet_wrap(~ variable) +\n  labs(\n    title = \"National Spending on Children by Year (Inflation Adjusted)\",\n    x = \"Year\",\n    y = \"Spending Per Child (Inflation Adjusted $)\"\n  ) +\n  \n  #Centered format\n  theme(legend.position = \"none\")\nData is courtesy of the TidyTuesday 1 and the Urban Institute.2"
+  },
+  {
+    "objectID": "tidy1.html#footnotes",
+    "href": "tidy1.html#footnotes",
+    "title": "United States Spending on Kids",
+    "section": "Footnotes",
+    "text": "Footnotes\n\n\nTidy Tuesday: https://github.com/rfordatascience/tidytuesday/blob/main/data/2020/2020-09-15/readme.md↩︎\nUrban Institute: https://datacatalog.urban.org/dataset/state-state-spending-kids-dataset↩︎"
   }
 ]

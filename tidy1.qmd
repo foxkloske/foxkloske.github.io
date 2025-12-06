@@ -1,25 +1,20 @@
 ---
 title: "United States Spending on Kids"
-description: Census survey data of spending on children from 1997 through 2016.
+description: "An Example of Data Visualization Using ggplot"
 author: Fox Kloske
 date: September 24, 2025
 format: html
+title-block-banner: "media/school.png"
+title-block-banner-color: white
 
 #Remove messages/warnings
 code-fold: true
 execute: 
   warning: false
   message: false
-
-#Citation & format 
-about:
-  template: jolla
-  links:
-    - text: TidyTuesday
-      href: https://github.com/rfordatascience/tidytuesday/blob/main/data/2020/2020-09-15/readme.md
-    - text: The Urban Institute
-      href: https://datacatalog.urban.org/dataset/state-state-spending-kids-dataset
 ---
+
+Graphing exercise using publicly available data of spending on children in the United States from 1997 through 2016. Data is courtesy of the TidyTuesday [^1] and the Urban Institute.[^2]
 
 ```{r}
 library(tidyverse)
@@ -35,19 +30,29 @@ national_average <- kids |>
          variable == "PK12ed" |
          variable == "Medicaid_CHIP" |
          variable == "parkrec") |>
-  summarize(inf_adj_perchild = mean(inf_adj_perchild))
+  summarize(inf_adj_perchild = mean(inf_adj_perchild)) |>
+  mutate(
+    variable = recode(variable,
+      lib = "Libraries",
+      PK12ed = "PreK–12 Education",
+      Medicaid_CHIP = "Medicaid/CHIP",
+      parkrec = "Parks & Recreation"
+    )
+  )
 
 ggplot(national_average, aes(x = year, y = inf_adj_perchild)) +
   geom_line(aes(color = variable)) +
   facet_wrap(~ variable) +
   labs(
-    title = "National Spending on Children by Year (Inflation Adjusted)",
+    title = "National Spending on Children by Year",
     x = "Year",
-    y = "Spending Per Child (Inflation Adjusted $)"
+    y = "Spending Per Child (Inflation Adjusted in Billions $)"
   ) +
   
   #Centered format
   theme(legend.position = "none")
 ```
 
-Data is courtesy of the TidyTuesday via the Urban Institute:
+[^1]: Tidy Tuesday: <https://github.com/rfordatascience/tidytuesday/blob/main/data/2020/2020-09-15/readme.md>
+
+[^2]: Urban Institute: <https://datacatalog.urban.org/dataset/state-state-spending-kids-dataset>

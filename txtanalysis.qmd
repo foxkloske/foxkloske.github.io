@@ -1,6 +1,6 @@
 ---
 title: "Central Park Squirrel Census"
-description: "Using regular expressions to learn about squirrels in Junuary 2018"
+description: "An Example of Data Wrangling Using ggplot"
 author: Fox Kloske
 date: October 8, 2025
 format: html

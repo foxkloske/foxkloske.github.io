@@ -1,6 +1,6 @@
 ---
 title: "California Policing"
-description: "Using SQL to compare policing statistics"
+description: "An Example of Data Wrangling Using SQL"
 author: Fox Kloske
 date: December 1, 2025
 format: html
