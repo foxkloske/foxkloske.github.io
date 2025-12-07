@@ -1,8 +1,6 @@
 ---
 title: "Transit Infrastructure Costs"
-description: "An Example of Data Visualization using ggplot"
-author: Fox Kloske
-date: September 24, 2025
+description: "**An Example of Data Visualization using ggplot**"
 format: html
 
 #Remove messages/warnings
@@ -11,9 +9,7 @@ execute:
   warning: false
   message: false
 
-#Citation & format 
-about:
-  template: jolla
+#Citation
   links:
     - text: TidyTuesday
       href: https://github.com/rfordatascience/tidytuesday/blob/main/data/2021/2021-01-05/readme.md
@@ -22,6 +18,9 @@ about:
 ---
 
 ```{r}
+#| out-width: 70%
+#| fig-align: center
+
 library(tidyverse)
 
 #Borrowed from TidyTuesday instructions

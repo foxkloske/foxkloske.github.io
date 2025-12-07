@@ -1,8 +1,6 @@
 ---
 title: "United States Spending on Kids"
-description: "An Example of Data Visualization Using ggplot"
-author: Fox Kloske
-date: September 24, 2025
+description: "**An Example of Data Visualization Using ggplot**"
 format: html
 title-block-banner: "media/school.png"
 title-block-banner-color: white
@@ -17,6 +15,9 @@ execute:
 Graphing exercise using publicly available data of spending on children in the United States from 1997 through 2016. Data is courtesy of the TidyTuesday [^1] and the Urban Institute.[^2]
 
 ```{r}
+#| out-width: 70%
+#| fig-align: center
+
 library(tidyverse)
 
 #Borrowed from TidyTuesday instructions

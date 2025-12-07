@@ -11,14 +11,17 @@ about:
   image-width: 17em
 
   links:
-    - text: LinkedIn
+    - text: Resume
       href: https://www.linkedin.com/in/foxkloske/
-    - text: GitHub
+      icon: linkedin
+    - text: Github Repository
       href: https://github.com/foxkloske/foxkloske.github.io
-    - text: TFRRS
+      icon: github
+    - text: Track Times
       href: https://www.tfrrs.org/athletes/8722625/Pomona_Pitzer/Fox_Kloske.html
+      icon: award
 ---
 
-Hi! Welcome to Fox's first website—thanks for stopping by. I go to Pomona College and use he/him pronouns. You may catch me playing Spikeball, watching the Brooklyn Nets, or working on an oil painting. Say hello if you see me around!
+Hi! Welcome to Fox's website—thanks for stopping by. I go to Pomona College and use he/him pronouns. You may catch me playing Spikeball, knocking out a problem set, or working on an oil painting. Let's go Brooklyn Nets!
 
-Feel free to check out
+Feel free to check out examples of my work on the tabs above: emphasis on cities and transportation. 

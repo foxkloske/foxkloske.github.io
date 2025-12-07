@@ -1,8 +1,6 @@
 ---
 title: "Central Park Squirrel Census"
-description: "An Example of Data Wrangling Using ggplot"
-author: Fox Kloske
-date: October 8, 2025
+description: "**An Example of Data Wrangling Using ggplot**"
 format: html
 title-block-banner: "media/squirrel.png"
 title-block-banner-color: white
@@ -14,10 +12,6 @@ execute:
   warning: false
   message: false
   
-#format
-about:
-  template: jolla
-  
 #citation
   links:
     - text: NYC OpenData
@@ -27,6 +21,9 @@ about:
 ---
 
 ```{r}
+#| out-width: 70%
+#| fig-align: center
+
 library(tidyverse)
 
 #fun dataset from NYC OpenData living in my github repository
@@ -41,7 +38,7 @@ ggplot(Squirrel1, aes(x = Location, fill = Location)) +
   geom_bar(na.rm = TRUE) +
     labs(
       title = "Where Do Squirrels Spend Their Time?",
-      x = "Relationship to Ground",
+      x = "",
       y = "Count"
   ) +
   theme_classic() +
@@ -53,6 +50,8 @@ theme(legend.position = "none")
 Most squirrels are spotted on the ground. The built-in columns gives some detail about where these acorn-lovers spend their days, but we can do better!
 
 ```{r}
+#| out-width: 70%
+#| fig-align: center
 
 Squirrel2 <- SquirrelCensus |>
   #A differnt str command to get rid of empty values!
@@ -68,7 +67,7 @@ ggplot(Squirrel2, aes(x = Activity, fill = tree_status)) +
   geom_bar() +
   labs(
     title = "What Are Squirrels Doing All Day?",
-    x = "Activity",
+    x = "",
     y = "Count",
     fill = "On a tree?"
   ) +
@@ -84,6 +83,9 @@ tree_count <- sum(str_count(tolower(SquirrelCensus), "(?<=\\s|^)tree"), na.rm = 
 Much better! The data shows a mix of squirrel-tivities. But most of all, squirrels spend a *tree*-mendous amount of time on and around trees. For this graph, only observations with specific location details are included. However, there are `r tree_count` mentions of tree-related shenanagins in the data set! Let's now get to the *nuts* and bolts of who they spend their time with.
 
 ```{r}
+#| out-width: 70%
+#| fig-align: center
+
 Squirrel3 <- SquirrelCensus |>
   #Sometimes the same dog in mentioned twice in interaction
   mutate(num_dogs = str_count(tolower(`Other Interactions`), "(?<!dog)dog"),

@@ -1,8 +1,6 @@
 ---
 title: "California Policing"
-description: "An Example of Data Wrangling Using SQL"
-author: Fox Kloske
-date: December 1, 2025
+description: "**An Example of Data Wrangling Using SQL**"
 format: html
 title-block-banner: "media/CA_highway.png"
 title-block-banner-color: white
@@ -21,6 +19,8 @@ The Stanford Open Policing Project compiled a database of nearly 100 million tra
 A note: understanding policing goes far beyond statistics. Community trust, relationships, and historical context are critical to evaluating policing, yet difficult to quantify. The following analysis is therefore descriptive and not meant to be exhaustive.
 
 In particular, I'd like to think about how traffic stops escalate. First, among the cities with available data, how many traffic stops lead to a search? Feel free to check out the code below:
+
+------------------------------------------------------------------------
 
 ```{r}
 con_traffic <- DBI::dbConnect(
@@ -90,7 +90,6 @@ library(ggplot2)
 library(dplyr)
 library(knitr)
 
-
 temp_output <- temp_output |>
   mutate(searchesByPop = searchesByPop*100) |>
   mutate(pctSearches = pctSearches*100)
@@ -103,11 +102,17 @@ display <- temp_output |>
 display
 ```
 
+------------------------------------------------------------------------
+
 Two variables slow immediate interpretation. One, available data exists for varying amounts of time. For example, policing data for San Francisco is available for ten years, whereas data for San Diego is available for only four. Second, the sizes of the cities considered vary significantly: Stockton is more than one million less residents than San Francisco. Therefore, included is stops by population, which represents the proportion of stops to residents per year.
 
 There are differences in both how many stops a police department makes and how often those stops lead to vehicle searches. San Jose, for example, makes relatively little stops, but a high number of them lead to searches. Oakland ranks highly in both categories.
 
+------------------------------------------------------------------------
+
 ```{r}
+#| out-width: 70%
+#| fig-align: center
 
 names(temp_output) <- 
   c("Police_Department", "Number_of_Stops", "Number_of_Searches", "Percentage_of_Searches", "Stops_by_Population (%)")
@@ -117,7 +122,7 @@ temp_output |>
   geom_col() + 
   labs(
     title = "Percentage of Stops that Lead to a Search",
-    x = "Police Department",
+    x = "",
     y = "Search Rate (%)") + 
     theme(legend.position = "none")
 ```
@@ -174,6 +179,8 @@ SELECT
 FROM ca_stockton_2020_04_01;
 ```
 
+------------------------------------------------------------------------
+
 Let's dig deeper, how many of these searches find something? How many lead to citations? How many lead to arrests?
 
 ```{r}
@@ -184,9 +191,14 @@ temp_output2 |>
         col.names = c("Police_Department", "Search that Leads to Citation", "Search that Leads to Arrest", "Search to Citation (%)", "Search to Arrest (%)"))
 ```
 
+------------------------------------------------------------------------
+
 Oakland leads both escalatory categories: the highest percentage of stops that lead to searches and searches that lead to arrests. Further, Oakland is the only police department measured where more stops lead to arrests than citations.
 
 ```{r}
+#| out-width: 70%
+#| fig-align: center
+
 library(tidyverse)
 
 temp_output2 |> 
@@ -200,10 +212,12 @@ temp_output2 |>
   geom_col(position="dodge") + 
   labs(
     title = "Percentage of Stops that Lead to a Search",
-    x = "Police Department",
+    x = "",
     y = "Search Rate (%)") + 
     theme(legend.position = "none")
 ```
+
+------------------------------------------------------------------------
 
 These results show interesting variation across police departments in stops, searches, and arrest rates. Importantly, however, these statistics cannot explain if these stops were fair, if searches had probable cause, or what, if anything, was found.
 

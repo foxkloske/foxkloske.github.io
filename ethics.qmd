@@ -1,8 +1,6 @@
 ---
 title: "Taxis, Hashing, and Privacy"
-description: "An Example of Data Storytelling"
-author: Fox Kloske
-date: November 12, 2025
+description: "**An Example of Data Storytelling**"
 format: html
 title-block-banner: "media/taxi_cab.png"
 title-block-banner-color: white

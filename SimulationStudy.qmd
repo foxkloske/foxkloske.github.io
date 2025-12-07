@@ -1,8 +1,6 @@
 ---
-title: "Undestanding Population and Educational Attainment in the United Kingdom" 
-description: "An Example of Statistical Analysis"
-author: Fox Kloske
-date: October 30, 2025
+title: "Undestanding Population and Educational in the United Kingdom" 
+description: "**An Example of Statistical Analysis**"
 format: html
 title-block-banner: "media/notting_hill.png"
 title-block-banner-color: white
@@ -19,9 +17,14 @@ In 2023, the United Kingdom's Office for National Statistics published an articl
 
 The above analysis is observational—let's test this claim to see if it can be generalized to a larger population. The ONS has created their own educational score—a summary of standardized test score performance over different points during education—which we will use to represent performance. A score of 0 is the national average: small towns have an average score of 0.4, medium 0.3, and large -0.9. Following the setup of the article, we will compare small towns against other town sizes with permutation testing to evaluate their claim.
 
+------------------------------------------------------------------------
+
 Let's first visualize the data:
 
 ```{r}
+#| out-width: 70%
+#| fig-align: center
+
 library(tidyverse)
 
 english_education <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2024/2024-01-23/english_education.csv')
@@ -40,6 +43,8 @@ english_education |>
     x = ""
   )
 ```
+
+------------------------------------------------------------------------
 
 Is this phenomenon by chance? To find out, we define our null hypothesis:
 
@@ -65,9 +70,14 @@ mean_diff <- english_education |>
 mean_diff
 ```
 
+------------------------------------------------------------------------
+
 Now, lets shuffle our data to create a null sampling distribution:
 
 ```{r}
+#| out-width: 70%
+#| fig-align: center
+
 set.seed(4747)
 
 #shuffle data
@@ -103,5 +113,7 @@ p_value <- perm_stats |>
 ```
 
 With a p-value of 0, we can strongly reject the null. Perhaps, this strong finding allows us to generalize the data to a larger population of UK students: the negative relationship of town size and academic performance may hold beyond the sample.
+
+------------------------------------------------------------------------
 
 Data was sourced from [TidyTuesday](https://github.com/rfordatascience/tidytuesday/blob/main/data/2024/2024-01-23/readme.md), January 3rd, 2024. The original data is courtesy of the [UK Office of National Statistics](https://www.ons.gov.uk/).

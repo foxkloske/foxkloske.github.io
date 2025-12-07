@@ -6,11 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Fox Kloske">
-<meta name="dcterms.date" content="2025-10-30">
-<meta name="description" content="Undestanding Population and Educational Attainment in the United Kingdom">
+<meta name="description" content="An Example of Statistical Analysis">
 
-<title>Does Town Size Matter? – Fox Kloske</title>
+<title>Undestanding Population and Educational in the United Kingdom – Fox Kloske</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -61,7 +59,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
 <script src="site_libs/clipboard/clipboard.min.js"></script>
 <script src="site_libs/quarto-search/autocomplete.umd.js"></script>
 <script src="site_libs/quarto-search/fuse.min.js"></script>
@@ -143,12 +140,12 @@ background-size: cover;
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
-            <ul class="navbar-nav navbar-nav-scroll me-auto">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item dropdown ">
     <a class="nav-link dropdown-toggle" href="#" id="nav-menu-data-exercises" role="link" data-bs-toggle="dropdown" aria-expanded="false">
  <span class="menu-text">Data Exercises</span>
     </a>
-    <ul class="dropdown-menu" aria-labelledby="nav-menu-data-exercises">    
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-data-exercises">    
         <li>
     <a class="dropdown-item" href="./SimulationStudy.html">
  <span class="dropdown-text">English Academic Achievement</span></a>
@@ -186,10 +183,10 @@ background-size: cover;
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-page">
-      <h1 class="title">Does Town Size Matter?</h1>
+      <h1 class="title">Undestanding Population and Educational in the United Kingdom</h1>
                   <div>
         <div class="description">
-          Undestanding Population and Educational Attainment in the United Kingdom
+          <strong>An Example of Statistical Analysis</strong>
         </div>
       </div>
                 </div>
@@ -198,19 +195,7 @@ background-size: cover;
   
   <div class="quarto-title-meta column-page">
 
-      <div>
-      <div class="quarto-title-meta-heading">Author</div>
-      <div class="quarto-title-meta-contents">
-               <p>Fox Kloske </p>
-            </div>
-    </div>
       
-      <div>
-      <div class="quarto-title-meta-heading">Published</div>
-      <div class="quarto-title-meta-contents">
-        <p class="date">October 30, 2025</p>
-      </div>
-    </div>
     
       
     </div>
@@ -231,8 +216,9 @@ background-size: cover;
 
 <p>In 2023, the United Kingdom’s Office for National Statistics published an article titled: <a href="https://www.ons.gov.uk/peoplepopulationandcommunity/educationandchildcare/articles/whydochildrenandyoungpeopleinsmallertownsdobetteracademicallythanthoseinlargertowns/2023-07-25">“Why do children and young people in smaller towns do better academically than those in larger town?”</a>. For 2012-2013 cohort, the study found that students in smaller towns had better educational attainment on average than those in medium or large towns and cities.</p>
 <p>The above analysis is observational—let’s test this claim to see if it can be generalized to a larger population. The ONS has created their own educational score—a summary of standardized test score performance over different points during education—which we will use to represent performance. A score of 0 is the national average: small towns have an average score of 0.4, medium 0.3, and large -0.9. Following the setup of the article, we will compare small towns against other town sizes with permutation testing to evaluate their claim.</p>
+<hr>
 <p>Let’s first visualize the data:</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
@@ -254,13 +240,14 @@ background-size: cover;
 <span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<div>
+<div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="SimulationStudy_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="SimulationStudy_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:70.0%"></p>
 </figure>
 </div>
 </div>
 </div>
+<hr>
 <p>Is this phenomenon by chance? To find out, we define our null hypothesis:</p>
 <ul>
 <li><p>H<sub>0</sub> = Town size has no effect on education score = Average_Education_Score<sub>SmallTown</sub> = Average_Education_Score<sub>OtherSizes</sub></p></li>
@@ -305,8 +292,9 @@ background-size: cover;
 </table>
 </div>
 </div>
+<hr>
 <p>Now, lets shuffle our data to create a null sampling distribution:</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">4747</span>)</span>
@@ -336,9 +324,9 @@ background-size: cover;
 <span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<div>
+<div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="SimulationStudy_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="SimulationStudy_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:70.0%"></p>
 </figure>
 </div>
 </div>
@@ -352,6 +340,7 @@ background-size: cover;
 </details>
 </div>
 <p>With a p-value of 0, we can strongly reject the null. Perhaps, this strong finding allows us to generalize the data to a larger population of UK students: the negative relationship of town size and academic performance may hold beyond the sample.</p>
+<hr>
 <p>Data was sourced from <a href="https://github.com/rfordatascience/tidytuesday/blob/main/data/2024/2024-01-23/readme.md">TidyTuesday</a>, January 3rd, 2024. The original data is courtesy of the <a href="https://www.ons.gov.uk/">UK Office of National Statistics</a>.</p>
 
 

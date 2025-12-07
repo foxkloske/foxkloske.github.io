@@ -6,7 +6,8 @@ website:
   title: "Fox Kloske"
   favicon: media/fox.png
   navbar:
-    left:
+    pinned: true
+    right:
       - text: "Data Exercises"
         menu:
           - text: "English Academic Achievement"
