@@ -49,7 +49,7 @@ ggplot(Squirrel1, aes(x = Location, fill = Location)) +
 theme(legend.position = "none")
 ```
 
-Most squirrels are spotted on the ground. These built-in columns gives some detail about where these acorn-lovers spend their days, but we can do better! Let's combine this location data by activity:
+Most squirrels are spotted on the ground. These built-in columns gives some detail about where these acorn-lovers spend their days, but we can do better! Let's combine this location data by activity. Here I reshape the activity columns into a longer format so I can compare how often different activities (running, foraging, etc.) appear, and whether they happen on trees or on the ground.
 
 ```{r}
 #| out-width: 70%
@@ -99,7 +99,7 @@ ggplot(Squirrel3, aes(x = Day, y = num_dogs)) +
   geom_col(fill = "springgreen4") +
   labs(
     title = "Daily Encounters of Squirrels and Dogs",
-    x = "Date",
+    x = "Day in January",
     y = "Number of Observations",
   ) +
   theme_classic()

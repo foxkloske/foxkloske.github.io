@@ -1,5 +1,5 @@
 ---
-title: "Undestanding Population and Educational in the United Kingdom" 
+title: "Understanding Population and Educational in the United Kingdom" 
 description: "**An Example of Statistical Analysis**"
 format: html
 title-block-banner: "media/notting_hill.png"
@@ -112,7 +112,7 @@ p_value <- perm_stats |>
   summarize(p_value = mean(score_diff > 0.7408704))
 ```
 
-With a p-value of 0, we can strongly reject the null. Perhaps, this strong finding allows us to generalize the data to a larger population of UK students: the negative relationship of town size and academic performance may hold beyond the sample.
+With a p-value of 0, we can strongly reject the null: this difference is unlikely to be due to random chance. However, this result comes form a specific dataset under certain conditions, so the p-value does not tell us by itself whether we can generalize this result to a larger population. To do so requires assumptions about if the sample is representative of a larger population. According to the original study, the intended population is English students in different sized towns or cities. Under that assumption, the results suggest that the groups differ in achievement patterns—beyond a difference in mean.
 
 ------------------------------------------------------------------------
 
