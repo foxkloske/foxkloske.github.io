@@ -23,6 +23,8 @@ In particular, I'd like to think about how traffic stops escalate. First, among 
 ------------------------------------------------------------------------
 
 ```{r}
+#| echo: false
+
 con_traffic <- DBI::dbConnect(
 
   RMariaDB::MariaDB(),
@@ -86,6 +88,8 @@ FROM ca_stockton_2020_04_01;
 ```
 
 ```{r}
+#| echo: false
+
 library(ggplot2)
 library(dplyr)
 library(knitr)
@@ -97,14 +101,18 @@ temp_output <- temp_output |>
 #Fancy Tables! Yay!
 display <- temp_output |>
   kable(row.names = FALSE,
-        col.names = c("Police_Department", "Number_of_Stops", "Number_of_Searches", "Percentage_of_Searches", "Stops_by_Population (%)"))
+        col.names = c("Police_Department", "Number_of_Stops", 
+                      "Number_of_Searches", "Percentage_of_Searches", 
+                      "Stops_by_Population (%)"))
 
 display
 ```
 
 ------------------------------------------------------------------------
 
-Two variables slow immediate interpretation. One, available data exists for varying amounts of time. For example, policing data for San Francisco is available for ten years, whereas data for San Diego is available for only four. Second, the sizes of the cities considered vary significantly: Stockton is more than one million less residents than San Francisco. Therefore, included is stops by population, which represents the proportion of stops to residents per year.
+Two variables slow immediate interpretation. One, available data exists for varying amounts of time. For example, policing data for San Francisco is available for ten years, whereas data for San Diego is available for only four. Second, the sizes of the cities considered vary significantly: Stockton is more than one million less residents than San Francisco. To understand the stops and searches in the context of the data and city, Stops_by_Population is a rough estimate: the number of stops are divided by the population of the city multiplied by the duration of years. Population estimates is based on 2025 census data.[^2]
+
+[^2]: Population Estimates: <https://www.census.gov/>
 
 There are differences in both how many stops a police department makes and how often those stops lead to vehicle searches. San Jose, for example, makes relatively little stops, but a high number of them lead to searches. Oakland ranks highly in both categories.
 
@@ -113,9 +121,10 @@ There are differences in both how many stops a police department makes and how o
 ```{r}
 #| out-width: 70%
 #| fig-align: center
+#| echo: false
 
 names(temp_output) <- 
-  c("Police_Department", "Number_of_Stops", "Number_of_Searches", "Percentage_of_Searches", "Stops_by_Population (%)")
+  c("Police_Department", "Number_of_Stops", "Number_of_Searches", "Percentage_of_Searches", "Stops_by_Population")
 
 temp_output |> 
   ggplot(aes(x = Police_Department, y = Percentage_of_Searches, fill = Police_Department)) +
@@ -124,7 +133,9 @@ temp_output |>
     title = "Percentage of Stops that Lead to a Search",
     x = "",
     y = "Search Rate (%)") + 
+    theme_minimal() +
     theme(legend.position = "none")
+    
 ```
 
 ```{sql, connection = con_traffic, output.var = "temp_output2"}
@@ -184,11 +195,14 @@ FROM ca_stockton_2020_04_01;
 Let's dig deeper, how many of these searches find something? How many lead to citations? How many lead to arrests?
 
 ```{r}
+#| echo: false
 
 temp_output2 |> 
   mutate(searchToCitationPercent = searchToCitationPercent*100, searchToArrestPercent = searchToArrestPercent*100) |>
   kable(row.names = FALSE,
-        col.names = c("Police_Department", "Search that Leads to Citation", "Search that Leads to Arrest", "Search to Citation (%)", "Search to Arrest (%)"))
+        col.names = c("Police_Department", "Search that Leads to Citation", 
+                      "Search that Leads to Arrest", "Search to Citation (%)", 
+                      "Search to Arrest (%)"))
 ```
 
 ------------------------------------------------------------------------
@@ -202,19 +216,24 @@ Oakland leads both escalatory categories: the highest percentage of stops that l
 library(tidyverse)
 
 temp_output2 |> 
+  rename(
+    citation = searchToCitationPercent,
+    arrest   = searchToArrestPercent
+  ) |>
   #Wow, I new pivots would come in handy!
   pivot_longer(
-    cols = c(searchToCitationPercent, searchToArrestPercent),
-    names_to = "searchResult",
-    values_to = "resultPercent") |>
-  ggplot(aes(x = PoliceDepartment, y = resultPercent, fill = searchResult)) +
+    cols = c(citation, arrest),
+    names_to = "Search_Result",
+    values_to = "resultPercent"
+  ) |>
+  ggplot(aes(x = PoliceDepartment, y = resultPercent, fill = Search_Result)) +
   #Dodge staggers the percents
   geom_col(position="dodge") + 
   labs(
     title = "Percentage of Stops that Lead to a Search",
     x = "",
-    y = "Search Rate (%)") + 
-    theme(legend.position = "none")
+    y = "Search Rate (%)") +
+  theme_classic()
 ```
 
 ------------------------------------------------------------------------
