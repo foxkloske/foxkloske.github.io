@@ -4,7 +4,14 @@
     "href": "tidy2.html",
     "title": "Transit Infrastructure Costs",
     "section": "",
-    "text": "Code\nlibrary(tidyverse)\n\n#Borrowed from TidyTuesday instructions\ntransit_cost &lt;- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2021/2021-01-05/transit_cost.csv')\n\ncountry_total &lt;- transit_cost |&gt;\n  group_by(country) |&gt;\n  filter(country == \"US\" |\n         country == \"CN\" |\n         country == \"BR\" |\n         country == \"FR\" |\n         country == \"AE\") |&gt;\n  summarize(cost_km_millions = mean(cost_km_millions))\n\nggplot(country_total, aes(x = country, y = cost_km_millions, fill = country)) +\n  geom_col() +\n    labs(\n    title = \"Transit Infrastructure Project Costs by Country\",\n    x = \"Country Code\",\n    y = \"Cost Per KM in Millions of USD\"\n  ) +\n  \n  #Centered format\n  theme(legend.position = \"none\")\n\n\n\n\n\n\n\n\n\nData is courtesy of the TidyTuesday via the Transit Costs Project:"
+    "text": "Code\nlibrary(tidyverse)\n\n#Borrowed from TidyTuesday instructions\ntransit_cost &lt;- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2021/2021-01-05/transit_cost.csv')\n\ncountry_total &lt;- transit_cost |&gt;\n  group_by(country) |&gt;\n  filter(country == \"US\" |\n         country == \"CN\" |\n         country == \"BR\" |\n         country == \"FR\" |\n         country == \"AE\") |&gt;\n  summarize(cost_km_millions = mean(cost_km_millions))\n\nggplot(country_total, aes(x = country, y = cost_km_millions, fill = country)) +\n  geom_col() +\n    labs(\n    title = \"Transit Infrastructure Project Costs by Country\",\n    x = \"Country Code\",\n    y = \"Cost Per KM in Millions of USD\"\n  ) +\n  \n  #Centered format\n  theme(legend.position = \"none\")\nData is downloaded from TidyTuesday.1 Data is courtesy of the Transit Costs Project.2 Header image is from LiveWorkDream.3"
+  },
+  {
+    "objectID": "tidy2.html#footnotes",
+    "href": "tidy2.html#footnotes",
+    "title": "Transit Infrastructure Costs",
+    "section": "Footnotes",
+    "text": "Footnotes\n\n\nhttps://github.com/rfordatascience/tidytuesday/blob/main/data/2021/2021-01-05/readme.md↩︎\nhttps://transitcosts.com/↩︎\nhttps://liveworkdream.com/2022/10/14/are-train-tracks-and-railroad-tracks-the-same/↩︎"
   },
   {
     "objectID": "about.html",

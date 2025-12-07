@@ -2,19 +2,15 @@
 title: "Transit Infrastructure Costs"
 description: "**An Example of Data Visualization using ggplot**"
 format: html
+title-block-banner: "media/train.png"
+title-block-banner-color: white
+
 
 #Remove messages/warnings
 code-fold: true
 execute: 
   warning: false
   message: false
-
-#Citation
-  links:
-    - text: TidyTuesday
-      href: https://github.com/rfordatascience/tidytuesday/blob/main/data/2021/2021-01-05/readme.md
-    - text: Transit Costs Project
-      href: https://transitcosts.com/
 ---
 
 ```{r}
@@ -47,4 +43,10 @@ ggplot(country_total, aes(x = country, y = cost_km_millions, fill = country)) +
   theme(legend.position = "none")
 ```
 
-Data is courtesy of the TidyTuesday via the Transit Costs Project:
+Data is downloaded from TidyTuesday.[^1]  Data is courtesy of the Transit Costs Project.[^2]  Header image is from LiveWorkDream.[^3]
+
+[^1]: <https://github.com/rfordatascience/tidytuesday/blob/main/data/2021/2021-01-05/readme.md>
+
+[^2]: <https://transitcosts.com/>
+
+[^3]: <https://liveworkdream.com/2022/10/14/are-train-tracks-and-railroad-tracks-the-same/>
