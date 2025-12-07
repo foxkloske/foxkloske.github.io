@@ -1,0 +1,13 @@
+---
+title: "Bathroom Window"
+description: "**Exhibited Artwork in Pomona College Chen Gallery**"
+format: html
+title-block-banner: "#A1BC98"
+title-block-banner-color: white
+---
+
+::: {style="height:1000px;"}
+<iframe src="media/painting.pdf" width="100%" height="100%" style="border:none;">
+
+</iframe>
+:::

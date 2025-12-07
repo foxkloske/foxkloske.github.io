@@ -1,0 +1,15 @@
+---
+title: "Cartography as Conquest"
+description: "**Matrakçı Nasuh and Imperial Ottoman Identity**"
+format: html
+title-block-banner: "media/istanbul.png"
+title-block-banner-color: white
+---
+
+::: {style="height:1000px;"}
+<iframe src="media/ARHI.pdf" width="100%" height="100%" style="border:none;">
+
+</iframe>
+:::
+
+Header image courtesy of The Architect Effect: <https://architecteffect.wordpress.com/>

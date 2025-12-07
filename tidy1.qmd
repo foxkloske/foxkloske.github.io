@@ -12,7 +12,13 @@ execute:
   message: false
 ---
 
-Graphing exercise using publicly available data of spending on children in the United States from 1997 through 2016. Data is courtesy of the TidyTuesday [^1] and the Urban Institute.[^2]
+Graphing exercise using publicly available data of spending on children in the United States from 1997 through 2016. Data is courtesy of the TidyTuesday [^1] and the Urban Institute.[^2] Header image is from Wikipedia by McGhiever.[^3]
+
+[^1]: Tidy Tuesday: <https://github.com/rfordatascience/tidytuesday/blob/main/data/2020/2020-09-15/readme.md>
+
+[^2]: Urban Institute: <https://datacatalog.urban.org/dataset/state-state-spending-kids-dataset>
+
+[^3]: McGhiever: <https://en.wikipedia.org/wiki/High_school_in_the_United_States#/media/File:Hibbing_High_School_2014.jpg>
 
 ```{r}
 #| out-width: 70%
@@ -53,7 +59,3 @@ ggplot(national_average, aes(x = year, y = inf_adj_perchild)) +
   #Centered format
   theme(legend.position = "none")
 ```
-
-[^1]: Tidy Tuesday: <https://github.com/rfordatascience/tidytuesday/blob/main/data/2020/2020-09-15/readme.md>
-
-[^2]: Urban Institute: <https://datacatalog.urban.org/dataset/state-state-spending-kids-dataset>

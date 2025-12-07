@@ -22,6 +22,12 @@ website:
             href: tidy1.qmd
           - text: "Transit-Infrastructure Costs"
             href: tidy2.qmd
+      - text: "Projects"
+        menu: 
+          - text: "Research Paper: Ottoman Art History"
+            href: project1.qmd
+          - text: "Painting: Bathroom Window"
+            href: project2.qmd
 
 format:
   html:
