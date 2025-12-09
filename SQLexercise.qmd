@@ -23,7 +23,6 @@ In particular, I'd like to think about how traffic stops escalate. First, among 
 ------------------------------------------------------------------------
 
 ```{r}
-#| echo: false
 
 con_traffic <- DBI::dbConnect(
 
@@ -88,7 +87,6 @@ FROM ca_stockton_2020_04_01;
 ```
 
 ```{r}
-#| echo: false
 
 library(ggplot2)
 library(dplyr)
@@ -121,7 +119,6 @@ There are differences in both how many stops a police department makes and how o
 ```{r}
 #| out-width: 70%
 #| fig-align: center
-#| echo: false
 
 names(temp_output) <- 
   c("Police_Department", "Number_of_Stops", "Number_of_Searches", "Percentage_of_Searches", "Stops_by_Population")
@@ -195,7 +192,6 @@ FROM ca_stockton_2020_04_01;
 Let's dig deeper, how many of these searches find something? How many lead to citations? How many lead to arrests?
 
 ```{r}
-#| echo: false
 
 temp_output2 |> 
   mutate(searchToCitationPercent = searchToCitationPercent*100, searchToArrestPercent = searchToArrestPercent*100) |>

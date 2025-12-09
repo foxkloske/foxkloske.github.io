@@ -22,6 +22,8 @@ website:
             href: tidy1.qmd
           - text: "Transit-Infrastructure Costs"
             href: tidy2.qmd
+          - text: "Foundations of Data Science Final Presentation"
+            href: presentation.qmd
       - text: "Projects"
         menu: 
           - text: "Research Paper: Ottoman Art History"

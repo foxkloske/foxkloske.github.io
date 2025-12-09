@@ -1,0 +1,106 @@
+---
+title: "Final Presentation"
+author: "Fox Kloske"
+subtitle: "12/10/2025"
+format:
+  revealjs:
+    scrollable: true
+    slide-number: true
+    show-slide-number: all
+    embed-resources: true
+execute:
+  echo: true
+  warning: false
+  message: false
+---
+
+##
+
+Question: If my website were data, what would it look like?
+
+##
+
+My website can be data! Webscraping...
+
+```{r}
+#| echo: false
+library(tidyverse)
+library(rvest)
+library(purrr)
+library(stringr)
+```
+
+```{r}
+page <- read_html("https://foxkloske.github.io/SimulationStudy.html")
+
+proj3 <- page |>
+  html_elements("code.sourceCode") |>
+  html_text()
+```
+
+```{r}
+#| echo: false
+page1 <- read_html("https://foxkloske.github.io/tidy2.html")
+page2 <- read_html("https://foxkloske.github.io/tidy1.html")
+
+proj1 <- c(page1 |>
+  html_elements("code.sourceCode") |> html_text(),
+           page2 |>
+  html_elements("code.sourceCode") |> html_text())
+
+
+page3 <- read_html("https://foxkloske.github.io/txtanalysis.html")
+proj2 <- page3 |>
+  html_elements("code.sourceCode") |>
+  html_text()
+
+page4 <- read_html("https://foxkloske.github.io/ethics.html")
+proj4 <- page4 |>
+  html_elements("code.sourceCode") |>
+  html_text()
+
+page5 <- read_html("https://foxkloske.github.io/SQLexercise.html")
+proj5 <- page5 |>
+  html_elements("code.sourceCode") |>
+  html_text()
+```
+
+##
+
+```{r}
+num_lines_proj1 <- sum(str_count(proj1, "\n")) + length(proj1)
+```
+
+```{r}
+#| echo: false
+num_lines_proj2 <- sum(str_count(proj2, "\n")) + length(proj2)
+
+num_lines_proj3 <- sum(str_count(proj3, "\n")) + length(proj3)
+
+num_lines_proj4 <- sum(str_count(proj4, "\n")) + length(proj4)
+
+num_lines_proj5 <- sum(str_count(proj5, "\n")) + length(proj5)
+```
+
+```{r}
+num_lines_total <- tibble(
+  name = c("Project 1", "Project 2", "Project 3", "Project 4", "Project 5"),
+  num_lines = c(num_lines_proj1, num_lines_proj2, num_lines_proj3, num_lines_proj4, num_lines_proj5)
+)
+```
+
+##
+
+```{r}
+#| echo: false
+ggplot(num_lines_total, aes(x = name, y = num_lines, fill = name)) +
+  geom_col() + 
+  theme_light() +
+  theme(legend.position = "none") + 
+  labs(
+    x = "",
+    y = "Number of Lines of Code",
+    title = "Progression of Code Length"
+  )
+```
+
