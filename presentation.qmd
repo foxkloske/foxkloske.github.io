@@ -1,5 +1,5 @@
 ---
-title: "Final Presentation"
+title: "If my Website was Data..."
 author: "Fox Kloske"
 subtitle: "12/10/2025"
 format:
@@ -27,7 +27,6 @@ library(knitr)
 
 Question: If my website were data, what would it look like?
 
-
 ```{r}
 page <- read_html("https://foxkloske.github.io/SimulationStudy.html")
 
@@ -36,18 +35,14 @@ proj3 <- page |>
   html_text()
 ```
 
-
 # Data Exploration
-
 
 ```{r}
 #| echo: false
 proj3
 ```
 
-
 # Data Exploration
-
 
 ```{r}
 #| echo: false
@@ -109,9 +104,7 @@ output <- num_lines_total |>
 output
 ```
 
-
 # Data Visualization
-
 
 ```{r}
 #| echo: false
@@ -258,7 +251,7 @@ ggplot(word_total, aes(x = word, y = count, fill = project)) +
   #format the x-axis labels on a diagonal so they fit
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
 ```
+
 # Data Conclusions & Communication
 
 I’ve grown a lot as a data scientist. And I can prove it—with data!
-
