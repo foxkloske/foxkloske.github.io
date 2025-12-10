@@ -251,7 +251,7 @@ ggplot(word_total, aes(x = word, y = count, fill = project)) +
   #each facet needs its own x-axis
   facet_grid(~ project, scales = "free_x") +
   labs(
-    title = "What am I talking about?",
+    title = "Most Frequent Keywords by Project",
     x = "",
     y = "Number of Occurances") +
   theme_classic() +
