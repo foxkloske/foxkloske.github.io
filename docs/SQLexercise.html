@@ -383,7 +383,7 @@ background-size: cover;
 </div>
 </div>
 <hr>
-<p>Two variables slow immediate interpretation. One, available data exists for varying amounts of time. For example, policing data for San Francisco is available for ten years, whereas data for San Diego is available for only four. Second, the sizes of the cities considered vary significantly: Stockton is more than one million less residents than San Francisco. To understand the stops and searches in the context of the data and city, Stops_by_Population is a rough estimate: the number of stops are divided by the population of the city multiplied by the duration of years. Population estimates is based on 2025 census data.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p>
+<p>Two variables slow immediate interpretation. One, available data exists for varying amounts of time. For example, policing data for San Francisco is available for ten years, whereas data for San Diego is available for only four. Second, the sizes of the cities considered vary significantly: Stockton is more than one million less residents than San Francisco. To understand the stops and searches in the context of the data and city, Stops_by_Population is a rough estimate: the number of stops are divided by the population of the city multiplied by the duration of years. Population estimates are based on 2025 census data.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p>
 <p>There are differences in both how many stops a police department makes and how often those stops lead to vehicle searches. San Jose, for example, makes relatively little stops, but a high number of them lead to searches. Oakland ranks highly in both categories.</p>
 <hr>
 <div class="cell" data-layout-align="center">
@@ -399,13 +399,13 @@ background-size: cover;
 <span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Percentage of Stops that Lead to a Search"</span>,</span>
 <span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">""</span>,</span>
 <span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Search Rate (%)"</span>) <span class="sc">+</span> </span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
 <span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="SQLexercise_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:70.0%"></p>
+<p><img src="SQLexercise_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:70.0%" alt="A bar chart comparing the percentage of traffic stops that lead to a car search by city."></p>
 </figure>
 </div>
 </div>
@@ -472,24 +472,24 @@ background-size: cover;
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>temp_output2 <span class="sc">|&gt;</span> </span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">searchToCitationPercent =</span> searchToCitationPercent<span class="sc">*</span><span class="dv">100</span>, <span class="at">searchToArrestPercent =</span> searchToArrestPercent<span class="sc">*</span><span class="dv">100</span>) <span class="sc">|&gt;</span></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>(<span class="at">row.names =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">col.names =</span> <span class="fu">c</span>(<span class="st">"Police_Department"</span>, <span class="st">"Search that Leads to Citation"</span>, </span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>                      <span class="st">"Search that Leads to Arrest"</span>, <span class="st">"Search to Citation (%)"</span>, </span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">col.names =</span> <span class="fu">c</span>(<span class="st">"Police_Department"</span>, <span class="st">"Search to Citation (num)"</span>, </span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>                      <span class="st">"Search to Arrest (num)"</span>, <span class="st">"Search to Citation (%)"</span>, </span>
 <span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>                      <span class="st">"Search to Arrest (%)"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <table class="caption-top table table-sm table-striped small">
 <colgroup>
-<col style="width: 15%">
-<col style="width: 25%">
-<col style="width: 23%">
+<col style="width: 16%">
+<col style="width: 22%">
+<col style="width: 20%">
+<col style="width: 20%">
 <col style="width: 19%">
-<col style="width: 17%">
 </colgroup>
 <thead>
 <tr class="header">
 <th style="text-align: left;">Police_Department</th>
-<th style="text-align: right;">Search that Leads to Citation</th>
-<th style="text-align: right;">Search that Leads to Arrest</th>
+<th style="text-align: right;">Search to Citation (num)</th>
+<th style="text-align: right;">Search to Arrest (num)</th>
 <th style="text-align: right;">Search to Citation (%)</th>
 <th style="text-align: right;">Search to Arrest (%)</th>
 </tr>
@@ -556,7 +556,7 @@ background-size: cover;
 <span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>  <span class="co">#Dodge staggers the percents</span></span>
 <span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">position=</span><span class="st">"dodge"</span>) <span class="sc">+</span> </span>
 <span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Percentage of Stops that Lead to a Search"</span>,</span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Search Escalation"</span>,</span>
 <span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">""</span>,</span>
 <span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Search Rate (%)"</span>) <span class="sc">+</span></span>
 <span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -564,7 +564,7 @@ background-size: cover;
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="SQLexercise_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:70.0%"></p>
+<p><img src="SQLexercise_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:70.0%" alt="A bar chart comparing the number of car searches that lead to an arrest versus citation within city and between."></p>
 </figure>
 </div>
 </div>
@@ -577,6 +577,8 @@ background-size: cover;
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>DBI<span class="sc">::</span><span class="fu">dbDisconnect</span>(con_traffic)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
+<hr>
+<p><em>Header Image</em>: Nevada Employee Savings Trust: <a href="https://nest.nv.gov/" class="uri">https://nest.nv.gov/</a></p>
 
 
 
@@ -584,8 +586,8 @@ background-size: cover;
 <div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
 
 <ol>
-<li id="fn1"><p>Pierson, Emma, Camelia Simoiu, Jan Overgoor, Sam Corbett-Davies, Daniel Jenson, Amy Shoemaker, Vignesh Ramachandran, et al.&nbsp;2020. “A Large-Scale Analysis of Racial Disparities in Police Stops Across the United States.” Nature Human Behaviour, 1–10.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn2"><p>Population Estimates: <a href="https://www.census.gov/" class="uri">https://www.census.gov/</a><a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn1"><p>Pierson, E., Simoiu, C., et al.&nbsp;(2020, May 4). <em>A large-scale analysis of racial disparities in police stops across the United States</em>. Nature Human Behaviour, 4, 736–745. https://doi.org/10.1038/s41562-020-0858-1<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>United States Census Bureau. (n.d.). United States Census Bureau. https://www.census.gov/<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

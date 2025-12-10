@@ -14,21 +14,19 @@ execute:
   message: false
 ---
 
-##
-
-Question: If my website were data, what would it look like?
-
-##
-
-My website can be data! Webscraping...
-
 ```{r}
 #| echo: false
 library(tidyverse)
 library(rvest)
 library(purrr)
 library(stringr)
+library(knitr)
 ```
+
+# Data Acquisition
+
+Question: If my website were data, what would it look like?
+
 
 ```{r}
 page <- read_html("https://foxkloske.github.io/SimulationStudy.html")
@@ -37,6 +35,19 @@ proj3 <- page |>
   html_elements("code.sourceCode") |>
   html_text()
 ```
+
+
+# Data Exploration
+
+
+```{r}
+#| echo: false
+proj3
+```
+
+
+# Data Exploration
+
 
 ```{r}
 #| echo: false
@@ -65,8 +76,6 @@ proj5 <- page5 |>
   html_text()
 ```
 
-##
-
 ```{r}
 num_lines_proj1 <- sum(str_count(proj1, "\n")) + length(proj1)
 ```
@@ -83,19 +92,33 @@ num_lines_proj5 <- sum(str_count(proj5, "\n")) + length(proj5)
 ```
 
 ```{r}
+#| echo: false
 num_lines_total <- tibble(
   name = c("Project 1", "Project 2", "Project 3", "Project 4", "Project 5"),
-  num_lines = c(num_lines_proj1, num_lines_proj2, num_lines_proj3, num_lines_proj4, num_lines_proj5)
-)
+  num_lines = c(num_lines_proj1, num_lines_proj2, num_lines_proj3, 
+                num_lines_proj4, num_lines_proj5)
+) 
+
+
+output <- num_lines_total |> 
+  kable(
+    row.names = FALSE,
+    col.names = c("Project", "Number of Lines of Code")
+  )
+
+output
 ```
 
-##
+
+# Data Visualization
+
 
 ```{r}
 #| echo: false
+#| out-width: 120%
 ggplot(num_lines_total, aes(x = name, y = num_lines, fill = name)) +
   geom_col() + 
-  theme_light() +
+  theme_classic() +
   theme(legend.position = "none") + 
   labs(
     x = "",
@@ -103,4 +126,139 @@ ggplot(num_lines_total, aes(x = name, y = num_lines, fill = name)) +
     title = "Progression of Code Length"
   )
 ```
+
+# Data Visualization
+
+```{r}
+#| echo: false
+page1 <- read_html("https://foxkloske.github.io/tidy2.html")
+page2 <- read_html("https://foxkloske.github.io/tidy1.html")
+
+proj1 <- c(page1 |>
+  html_elements("#quarto-document-content > p") |> html_text(),
+           page2 |>
+  html_elements("#quarto-document-content > p") |> html_text())
+
+page3 <- read_html("https://foxkloske.github.io/txtanalysis.html")
+proj2 <- page3 |>
+  html_elements("#quarto-document-content > p") |>
+  html_text()
+
+page <- read_html("https://foxkloske.github.io/SimulationStudy.html")
+proj3 <- page |>
+  html_elements("li p , #quarto-document-content > p") |>
+  html_text()
+
+page4 <- read_html("https://foxkloske.github.io/ethics.html")
+proj4 <- page4 |>
+  html_elements("#quarto-document-content > p") |>
+  html_text()
+
+page5 <- read_html("https://foxkloske.github.io/SQLexercise.html")
+proj5 <- page5 |>
+  html_elements("#quarto-document-content > p") |>
+  html_text()
+```
+
+```{r}
+#| echo: false
+#remove lower punctuation, paste in one string
+single_proj1 <- paste(proj1, collapse = " ") |>
+  str_remove_all("[.,—;:']") |>
+  tolower()
+
+#split each word into list
+words_proj1 <- str_split(single_proj1, " ")[[1]]
+
+#tricky way of eliminating these boring words
+not_interested <- c("the","and","or","having","but","this","with","about","because","have","is","of","on","to","a","in","how","are","we","as","that","=","these","our","it","from","what")
+elim <- match(words_proj1, not_interested)
+#only keep if doesn't match
+words_proj1 <- words_proj1[is.na(elim)]
+
+#a tibble can use these convenient verbs!
+count_proj1 <- tibble(word = words_proj1) |>
+  group_by(word) |>
+  summarise(count = n()) |>
+  arrange(desc(count)) |>
+  head(3) |>
+  mutate(project = "Project 1")
+
+#Repeat!
+single_proj2 <- paste(proj2, collapse = " ") |>
+  str_remove_all("[.,—;:']") |>
+  tolower()
+words_proj2 <- str_split(single_proj2, " ")[[1]]
+not_interested <- c("the","and","or","having","but","this","with","about","because","have","is","of","on","to","a","in","how","are","we","as","that","=","these","our","it","from","what")
+elim <- match(words_proj2, not_interested)
+words_proj2 <- words_proj2[is.na(elim)]
+count_proj2 <- tibble(word = words_proj2) |>
+  group_by(word) |>
+  summarise(count = n()) |>
+  arrange(desc(count)) |>
+  head(3) |>
+  mutate(project = "Project 2")
+
+single_proj3 <- paste(proj3, collapse = " ") |>
+  str_remove_all("[.,—;:']") |>
+  tolower()
+words_proj3 <- str_split(single_proj3, " ")[[1]]
+not_interested <- c("the","and","or","having","but","this","with","about","because","have","is","of","on","to","a","in","how","are","we","as","that","=","these","our","it","from","what")
+elim <- match(words_proj3, not_interested)
+words_proj3 <- words_proj3[is.na(elim)]
+count_proj3 <- tibble(word = words_proj3) |>
+  group_by(word) |>
+  summarise(count = n()) |>
+  arrange(desc(count)) |>
+  head(3) |>
+  mutate(project = "Project 3")
+
+single_proj4 <- paste(proj4, collapse = " ") |>
+  str_remove_all("[.,—;:']") |>
+  tolower()
+words_proj4 <- str_split(single_proj4, " ")[[1]]
+not_interested <- c("the","and","or","having","but","this","with","about","because","have","is","of","on","to","a","in","how","are","we","as","that","=","these","our","it","from","what")
+elim <- match(words_proj4, not_interested)
+words_proj4 <- words_proj4[is.na(elim)]
+count_proj4 <- tibble(word = words_proj4) |>
+  group_by(word) |>
+  summarise(count = n()) |>
+  arrange(desc(count)) |>
+  head(3) |>
+  mutate(project = "Project 4")
+
+single_proj5 <- paste(proj5, collapse = " ") |>
+  str_remove_all("[.,—;:']") |>
+  tolower()
+words_proj5 <- str_split(single_proj5, " ")[[1]]
+not_interested <- c("the","and","or","having","but","this","with","about","because","have","is","of","on","to","a","in","how","are","we","as","that","=","these","our","it","from","what")
+elim <- match(words_proj5, not_interested)
+words_proj5 <- words_proj5[is.na(elim)]
+count_proj5 <- tibble(word = words_proj5) |>
+  group_by(word) |>
+  summarise(count = n()) |>
+  arrange(desc(count)) |>
+  head(3) |>
+  mutate(project = "Project 5")
+```
+
+```{r}
+#| echo: false
+word_total <- bind_rows(count_proj1, count_proj2, count_proj3, count_proj4, count_proj5)
+
+ggplot(word_total, aes(x = word, y = count, fill = project)) +
+  geom_col() + 
+  #each facet needs its own x-axis
+  facet_grid(~ project, scales = "free_x") +
+  labs(
+    title = "What am I talking about?",
+    x = "",
+    y = "Number of Occurances") +
+  theme_classic() +
+  #format the x-axis labels on a diagonal so they fit
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+```
+# Data Conclusions & Communication
+
+I’ve grown a lot as a data scientist. And I can prove it—with data!
 

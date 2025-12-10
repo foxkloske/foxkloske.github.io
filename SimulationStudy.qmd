@@ -13,7 +13,9 @@ execute:
   message: false
 ---
 
-In 2023, the United Kingdom's Office for National Statistics published an article titled: ["Why do children and young people in smaller towns do better academically than those in larger town?"](https://www.ons.gov.uk/peoplepopulationandcommunity/educationandchildcare/articles/whydochildrenandyoungpeopleinsmallertownsdobetteracademicallythanthoseinlargertowns/2023-07-25). For 2012-2013 cohort, the study found that students in smaller towns had better educational attainment on average than those in medium or large towns and cities.
+In 2023, the United Kingdom's Office for National Statistics published an article titled: ["Why do children and young people in smaller towns do better academically than those in larger town?"](https://www.ons.gov.uk/peoplepopulationandcommunity/educationandchildcare/articles/whydochildrenandyoungpeopleinsmallertownsdobetteracademicallythanthoseinlargertowns/2023-07-25).[^1] For 2012-2013 cohort, the study found that students in smaller towns had better educational attainment on average than those in medium or large towns and cities.
+
+[^1]: Office for National Statistics. (2023, July 25). *Why do Children and Young People in Smaller Towns do Better Academically than those in Larger Towns?*. <http://ons.gov.uk/peoplepopulationandcommunity/educationandchildcare/articles/whydochildrenandyoungpeopleinsmallertownsdobetteracademicallythanthoseinlargertowns/2023-07-25>
 
 The above analysis is observational—let's test this claim to see if it can be generalized to a larger population. The ONS has created their own educational score—a summary of standardized test score performance over different points during education—which we will use to represent performance. A score of 0 is the national average: small towns have an average score of 0.4, medium 0.3, and large -0.9. Following the setup of the article, we will compare small towns against other town sizes with permutation testing to evaluate their claim.
 
@@ -24,6 +26,7 @@ Let's first visualize the data:
 ```{r}
 #| out-width: 70%
 #| fig-align: center
+#| fig-alt: "A boxplot visualizing the distributions of test scores for small towns and medium/large/cities."
 
 library(tidyverse)
 
@@ -77,6 +80,7 @@ Now, lets shuffle our data to create a null sampling distribution:
 ```{r}
 #| out-width: 70%
 #| fig-align: center
+#| fig-alt: "A bar chart showing the results of 1000 simulations of the null sampling distribution."
 
 set.seed(4747)
 
@@ -116,4 +120,8 @@ With a p-value of 0, we can strongly reject the null: this difference is unlikel
 
 ------------------------------------------------------------------------
 
-Data was sourced from [TidyTuesday](https://github.com/rfordatascience/tidytuesday/blob/main/data/2024/2024-01-23/readme.md), January 3rd, 2024. The original data is courtesy of the [UK Office of National Statistics](https://www.ons.gov.uk/).
+Data was sourced from TidyTuesday.[^2] *Header Image*: London Perfect: <https://www.londonperfect.com/blog/2019/03/notting-hills-most-colorful-streets/>
+
+[^2]: Johnson, Bradford. (2025, March 29). *Educational Attainment of Young People in English Towns*. TidyTuesday. <https://github.com/rfordatascience/tidytuesday/blob/main/data/2024/2024-01-23/readme.md>
+
+

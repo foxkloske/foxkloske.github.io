@@ -13,11 +13,16 @@ execute:
   message: false
 ---
 
-Graphing exercise using data on the costs of hundreds of rail projects around the world. Data is downloaded from TidyTuesday.[^1] Data is courtesy of the Transit Costs Project.[^2] Header image is from LiveWorkDream.[^3]
+Graphing exercise using data on the costs of hundreds of rail projects around the world. Data is downloaded from TidyTuesday.[^1] Data is courtesy of the Transit Costs Project.[^2]
+
+[^1]: Harmon, Jon. (2021, January 5). *Transit Costs Project*. TidyTuesday. <https://github.com/rfordatascience/tidytuesday/blob/main/data/2021/2021-01-05/readme.md>
+
+[^2]: Transit Costs Project. (n.d.). NYU Marron Institute. <https://transitcosts.com/data/>
 
 ```{r}
 #| out-width: 70%
 #| fig-align: center
+#| fig-alt: "A bar chart showing the cost per kilometer of building rail in different countries."
 
 library(tidyverse)
 
@@ -45,9 +50,6 @@ ggplot(country_total, aes(x = country, y = cost_km_millions, fill = country)) +
   theme(legend.position = "none")
 ```
 
+------------------------------------------------------------------------
 
-[^1]: TidyTuesday: <https://github.com/rfordatascience/tidytuesday/blob/main/data/2021/2021-01-05/readme.md>
-
-[^2]: The Transit Costs Project: <https://transitcosts.com/>
-
-[^3]: LiveWorkDream: <https://liveworkdream.com/2022/10/14/are-train-tracks-and-railroad-tracks-the-same/>
+*Header Image*: LiveWorkDream: <https://liveworkdream.com/2022/10/14/are-train-tracks-and-railroad-tracks-the-same/>

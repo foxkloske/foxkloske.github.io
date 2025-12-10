@@ -233,7 +233,7 @@ background-size: cover;
 
 
 
-<p>In 2023, the United Kingdom’s Office for National Statistics published an article titled: <a href="https://www.ons.gov.uk/peoplepopulationandcommunity/educationandchildcare/articles/whydochildrenandyoungpeopleinsmallertownsdobetteracademicallythanthoseinlargertowns/2023-07-25">“Why do children and young people in smaller towns do better academically than those in larger town?”</a>. For 2012-2013 cohort, the study found that students in smaller towns had better educational attainment on average than those in medium or large towns and cities.</p>
+<p>In 2023, the United Kingdom’s Office for National Statistics published an article titled: <a href="https://www.ons.gov.uk/peoplepopulationandcommunity/educationandchildcare/articles/whydochildrenandyoungpeopleinsmallertownsdobetteracademicallythanthoseinlargertowns/2023-07-25">“Why do children and young people in smaller towns do better academically than those in larger town?”</a>.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> For 2012-2013 cohort, the study found that students in smaller towns had better educational attainment on average than those in medium or large towns and cities.</p>
 <p>The above analysis is observational—let’s test this claim to see if it can be generalized to a larger population. The ONS has created their own educational score—a summary of standardized test score performance over different points during education—which we will use to represent performance. A score of 0 is the national average: small towns have an average score of 0.4, medium 0.3, and large -0.9. Following the setup of the article, we will compare small towns against other town sizes with permutation testing to evaluate their claim.</p>
 <hr>
 <p>Let’s first visualize the data:</p>
@@ -360,11 +360,18 @@ background-size: cover;
 </div>
 <p>With a p-value of 0, we can strongly reject the null: this difference is unlikely to be due to random chance. However, this result comes form a specific dataset under certain conditions, so the p-value does not tell us by itself whether we can generalize this result to a larger population. To do so requires assumptions about if the sample is representative of a larger population. According to the original study, the intended population is English students in different sized towns or cities. Under that assumption, the results suggest that the groups differ in achievement patterns—beyond a difference in mean.</p>
 <hr>
-<p>Data was sourced from <a href="https://github.com/rfordatascience/tidytuesday/blob/main/data/2024/2024-01-23/readme.md">TidyTuesday</a>, January 3rd, 2024. The original data is courtesy of the <a href="https://www.ons.gov.uk/">UK Office of National Statistics</a>.</p>
+<p>Data was sourced from TidyTuesday.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> <em>Header Image</em>: London Perfect: <a href="https://www.londonperfect.com/blog/2019/03/notting-hills-most-colorful-streets/" class="uri">https://www.londonperfect.com/blog/2019/03/notting-hills-most-colorful-streets/</a></p>
 
 
 
-</main> <!-- /main -->
+
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>Office for National Statistics. (2023, July 25). <em>Why do Children and Young People in Smaller Towns do Better Academically than those in Larger Towns?</em>. <a href="http://ons.gov.uk/peoplepopulationandcommunity/educationandchildcare/articles/whydochildrenandyoungpeopleinsmallertownsdobetteracademicallythanthoseinlargertowns/2023-07-25" class="uri">http://ons.gov.uk/peoplepopulationandcommunity/educationandchildcare/articles/whydochildrenandyoungpeopleinsmallertownsdobetteracademicallythanthoseinlargertowns/2023-07-25</a><a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>Johnson, Bradford. (2025, March 29). <em>Educational Attainment of Young People in English Towns</em>. TidyTuesday. <a href="https://github.com/rfordatascience/tidytuesday/blob/main/data/2024/2024-01-23/readme.md" class="uri">https://github.com/rfordatascience/tidytuesday/blob/main/data/2024/2024-01-23/readme.md</a><a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {

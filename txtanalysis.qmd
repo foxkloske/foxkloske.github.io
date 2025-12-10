@@ -22,9 +22,14 @@ execute:
 
 The Central Park Squirrel Census offers a uniqely fun dataset to practice with regular expressions.[^1] To find out more for yourself about these squirrels, visit NYC OpenData.[^2] To start, the census includes data on location when sighted—let's find out where these squirrels hang out:
 
+[^1]: The Squirrel Census. (n.d.). *The Squirrel Census*. <https://www.thesquirrelcensus.com/>
+
+[^2]: New York City Department of Parks and Recreation. (2018). *2018 Central Park Squirrel Census — Squirrel Data*. NYC Open Data. <https://data.cityofnewyork.us/Environment/2018-Central-Park-Squirrel-Census-Squirrel-Data/vfnx-vebw/about_data>
+
 ```{r}
 #| out-width: 70%
 #| fig-align: center
+#| fig-alt: "A bar chart showing whether squirrels are cited on the ground or above."
 
 library(tidyverse)
 
@@ -54,6 +59,7 @@ Most squirrels are spotted on the ground. These built-in columns gives some deta
 ```{r}
 #| out-width: 70%
 #| fig-align: center
+#| fig-alt: "A bar chart showing the distribution of activities for squirrels and whether they are on or near a tree."
 
 Squirrel2 <- SquirrelCensus |>
   #A differnt str command to get rid of empty values!
@@ -87,6 +93,7 @@ Much better! The data shows a mix of squirrel-tivities. But most of all, squirre
 ```{r}
 #| out-width: 70%
 #| fig-align: center
+#| fig-alt: "A bar chart of days during the survey when squirrels were most mentioned with dogs."
 
 Squirrel3 <- SquirrelCensus |>
   #Sometimes the same dog in mentioned twice in interaction. Ex: dog was chasing but got dog got lost.
@@ -108,9 +115,9 @@ ggplot(Squirrel3, aes(x = Day, y = num_dogs)) +
 chase_count <- sum(str_count(tolower(SquirrelCensus), "nut|acorn"), na.rm = TRUE)
 ```
 
-Dogs! These poor squirrels spend their time in Central Park running from dogs! Data is taken over the month of January 2018, but not every day is captured, creating this funky x-axis. And, to make matters worse, of the 3,022 observations, only  `r chase_count` mention eating yummy food!
+Dogs! These poor squirrels spend their time in Central Park running from dogs! Data is taken over the month of January 2018, but not every day is captured, creating this funky x-axis. January 13 and 14th are the Saturday and Sunday, respectively—these poor squirrels don't get the weekends off. And, to make matters worse, of the 3,022 observations, only `r chase_count` mention eating yummy food!
 
 Thanks for tagging along on this journey to understand the busy social lives of our furry neighbors!
 
-[^1]: The Squirrel Census: <https://www.thesquirrelcensus.com/>
-[^2]: NYC OpenData: <https://data.cityofnewyork.us/Environment/2018-Central-Park-Squirrel-Census-Squirrel-Data/vfnx-vebw/about_data>
+***
+*Header Image*: Town and Country: <https://town-country-pest-control.co.uk/common-pests/squirrel-removal/>

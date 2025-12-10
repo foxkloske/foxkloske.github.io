@@ -14,23 +14,23 @@ execute:
 
 If you rode in a yellow cab in New York City in 2014, details of that ride—date, time, payment, tip—were recorded. After a Freedom of Information Law request by Chris Whong, all 173 million trips on 2014 were released publicly.[^1] What began as curiosity has become a case study of privacy risks in public data: without careful protections, anonymous data is not always anonymous.
 
-[^1]: Whong, C. (2013, May 8). NYC taxi FOIL: Taxi trip data and lessons for open-data. <https://chriswhong.com/open-data/foil_nyc_taxi/>
+[^1]: Whong, C. (2013, May 8). *NYC taxi FOIL: Taxi trip data and lessons for open-data*. <https://chriswhong.com/open-data/foil_nyc_taxi/>
 
 Importantly for every trip, the taxi cab data set includes the drivers medallion and hack license number. This inclusion allows rich cab-level analysis: where do drivers have the quickest customer turnaround or how many trips can a driver make in one day? However, as identified by computer scientist Vijay Pandurangan, the anonymization of these values held a crucial error (Pardurangan, 2014).[^2]
 
-[^2]: Pandurangan, V. (2014, June 17). On taxis and rainbows: Lessons from NYC’s improperly anonymized taxi logs. <https://medium.com/vijay-pandurangan/of-taxis-and-rainbows-f6bc289679a1>
+[^2]: Pandurangan, V. (2014, June 17). *On taxis and rainbows: Lessons from NYC’s improperly anonymized taxi logs*. <https://medium.com/vijay-pandurangan/of-taxis-and-rainbows-f6bc289679a1>
 
 Both the medallion number and hack license numbers are stored in the dataset as an MD5 hash, where every input returns the same output. While this may be effective to anonymize some unpredictable information, both hashed inputs are significantly patterned. For example, license numbers are six or seven digits, and medallion numbers adhere to specific constraints—combined, there were 22 million possible combinations. Within two minutes, using powerful computing, Pandurangan computed these hashes. Within an hour, the entire dataset was de-anonymized (Pandurangan, 2014).[^3]
 
-[^3]: Goodin, D. (2014, June 18). Poorly anonymized logs reveal NYC cab drivers’ detailed whereabouts. Ars Technica. <https://arstechnica.com/tech-policy/2014/06/poorly-anonymized-logs-reveal-nyc-cab-drivers-detailed-whereabouts/>
+[^3]: Goodin, D. (2014, June 18). *Poorly anonymized logs reveal NYC cab drivers’ detailed whereabouts*. Ars Technica. <https://arstechnica.com/tech-policy/2014/06/poorly-anonymized-logs-reveal-nyc-cab-drivers-detailed-whereabouts/>
 
 The result is a 173 million rows of personal information. Pandurangan's exercise ended there, but linking license number to driver name or medallion to owner are doable with resources directly from the NYC Taxi and Limousine Commission.[^4] The resulting possibilities raise clear privacy concerns: how much did a specific person make in a year, or where do they likely live are answerable questions.
 
-[^4]: New York City Taxi and Limousine Commission (n.d.). Medallion License Lookup. <https://www.nyc.gov/html/tlc_medallion_info/html/tlc_lookup.shtml>
+[^4]: New York City Taxi and Limousine Commission (n.d.). *Medallion License Lookup*. <https://www.nyc.gov/html/tlc_medallion_info/html/tlc_lookup.shtml>
 
 One way in which we can evaluate this story is based on the Data Values and Principles Manifesto.[^5] Here are a few:
 
-[^5]: The Data Practices Alliance. (n.d.). Data Values and Principles. <https://datapractices.org/manifesto/>
+[^5]: The Data Practices Alliance. (n.d.). *Data Values and Principles*. <https://datapractices.org/manifesto/>
 
 *Protect Protect the privacy and security of individuals represented in our data*: The TLC’s release failed on this front. Even though the intent was to support transparency, the weak anonymization exposed riders and drivers to imediate re-identification risks. Protecting privacy requires anticipating how data could be used, not just removing names. This example reminds us that public record status does not eliminate our obligation to consider what harm might follow from releasing personal data.
 
@@ -39,3 +39,6 @@ One way in which we can evaluate this story is based on the Data Values and Prin
 *Recognize and mitigate bias in ourselves and in the data we use*: The TLC's release encodes structural bias: who uses taxis, what neighborhoods are served, and how mobility is distributed across the city. These patterns reflect existing inequalities and analyzing them without context can reinforce biased conclusions. Recognizing bias in this example begins with acknowledging that the data represents only a subset of New Yorkers, while overrepresenting others. Further, mitigating this bias requires explicit about who is captured, who is missing, and how that shapes insights drawn from the data. Ethical analysis doesn’t require demographic variables; it requires situating the data within the broader social system that produced it.
 
 *Present our work in ways that empower others to make better-informed decisions*: Pandurangan’s write-up is a good model of this principle: it explains clearly how re-identification occurred and why it is dangerous. The result is helpful to policymakers, agencies, and the public to understand what happens when detailed personal data is released without adequate safeguards. When data scientists communicate these risks honestly, it empowers decision-makers to design better privacy policies, reconsidering what open data should look like.
+
+***
+*Header Image*: Lindsey Kraay: <https://www.flickr.com/photos/lindseykraay/5234260338/>
